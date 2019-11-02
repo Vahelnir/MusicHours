@@ -14,20 +14,26 @@ function myTimer(){
     let date = new Date();
     afficheHeure.innerHTML = date.toLocaleTimeString();
     if(date.getHours() != HeureLancement){
-        HeureLancement = date.getHours();
-        musique.fade(1,0, 2000);
-        setTimeout(musiquechange1, 2000); 
-        function musiquechange1(){
-        musique.pause();
-        musique.unload();
-        musique._src = `musiques/normal/${HeureLancement}.mp3`;
-        musique.load();
-        if(musique.playing() == true){
-            musique.play();
-            setTimeout(musiquechange2, 1000); 
-            function musiquechange2(){
-            musique.fade(0,1, 1000);
+            HeureLancement = date.getHours();
+
+            let isplaying = true;
+            if(musique.playing() == false){
+                isplaying = false;
             }
+
+            musique.fade(1,0, 2000);
+            setTimeout(musiquechange1, 2000); 
+            function musiquechange1(){
+                musique.pause();
+                musique.unload();
+                musique._src = `musiques/normal/${HeureLancement}.mp3`;
+                musique.load();
+                if(isplaying == true){
+                    musique.play();
+                    setTimeout(musiquechange2, 1000); 
+                     function musiquechange2(){
+                        musique.fade(0,1, 1000);
+                } 
             }
         }
     }

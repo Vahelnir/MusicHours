@@ -1,8 +1,46 @@
 body{
     margin: 0px;
 }
+.pageOut{
+    height: 100vh;
+    width: 100%;
+}
 
-.page{
+#b1{
+    background: linear-gradient(rgb(136, 184, 216),rgb(202, 232, 252));
+    transition: 1s;
+}
+
+.c1{
+    color: rgb(57, 120, 161);
+    transition: 1s;
+}
+
+.cbg1::-webkit-slider-thumb{
+    background: rgb(57, 120, 161);
+    transition: 1s;
+}
+
+.nuage1{
+    position: absolute;
+    margin-top: 3%;
+    margin-left: 75%;
+    animation-name: cloud2;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+}
+
+.nuage2{
+    position: absolute;
+    margin-top: 5%;
+    margin-left: 5%;
+
+    animation-name: cloud;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+}
+
+.pageIn{
     height: 100vh;
     width: 100%;
     display: flex;
@@ -10,13 +48,17 @@ body{
     justify-content: center;
     align-content: center;
     align-items: center;
+
+    background-image: url("medias/Plaine\ flat.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 #heure{
     font-size: 150px;
     margin-top: 0px;
     margin-bottom: 0px;
-    color: rgb(57, 120, 161);
     font-family: 'Quicksand', sans-serif;
     margin-bottom: 5%;
 }
@@ -32,13 +74,11 @@ body{
 
 #playpause{
     font-size: 100px;
-    color: rgb(57, 120, 161);
     transition: 0.3s;
 }
   
 #playpause:hover{
     cursor: pointer;
-    color: rgb(46, 92, 122);
 }
 
 #playpause:active{
@@ -66,7 +106,6 @@ body{
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    background: rgb(57, 120, 161);
     cursor: pointer;
 }
   
@@ -74,6 +113,33 @@ body{
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    background: rgb(57, 120, 161);
     cursor: pointer;
+}
+
+@keyframes cloud{
+    0% {
+      transform: translateX(0px);
+    }
+
+    50%{
+        transform: translateX(-25px);
+    }
+
+    100%{
+        transform: translateX(0px);
+    }
+}
+
+@keyframes cloud2{
+    0% {
+      transform: translateX(0px);
+    }
+
+    50%{
+        transform: translateX(25px);
+    }
+
+    100%{
+        transform: translateX(0px);
+    }
 }
