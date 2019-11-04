@@ -8,6 +8,50 @@ let musique = new Howl({
 });
 
 const afficheHeure = document.querySelector('#heure');
+const BgColor = document.querySelector('#b1');
+const BgInColor = document.querySelector('#pageInBG1');
+const NuageImage1 = document.querySelector('.nuage1');
+const NuageImage2 = document.querySelector('.nuage2');
+const BgEtoiles = document.querySelector('.bgStars1');
+const TextColor = document.querySelector('#heure');
+const PlayerColor = document.querySelector('#playpause');
+const SliderColor = document.querySelector('#myRange');
+
+let lancement = true;
+let HeureLancement = heure;
+
+function verifHeureBG(){
+    let heureBGF;
+
+    if(HeureLancement <= 6  && HeureLancement >= 20){
+        heureBGF = 3;
+    }
+    else if(HeureLancement == 7 || HeureLancement == 8 || HeureLancement == 18 || HeureLancement == 19){
+        heureBGF = 2;
+    }
+    else{
+        heureBGF = 1;
+    }
+
+    return heureBGF;
+}
+
+var heureBG = verifHeureBG();
+
+function changebg(valeurBG){
+    BgColor.className = `bg${valeurBG}`;
+    BgInColor.id = `pageInBG${valeurBG}`;
+    NuageImage1.className = `nuage1 nuageImage${valeurBG}`;
+    NuageImage2.className = `nuage2 nuageImage${valeurBG}`;
+    BgEtoiles.className = `bgStars${valeurBG}`;
+    TextColor.className = `c${valeurBG}`;
+    PlayerColor.className = `c${valeurBG} material-icons`;
+    SliderColor.className = `cbg${valeurBG} slider`;
+}
+
+changebg(heureBG);
+
+//rgb(228, 156, 62)
 
 var Timer = setInterval(myTimer);
 function myTimer(){
@@ -15,6 +59,11 @@ function myTimer(){
     afficheHeure.innerHTML = date.toLocaleTimeString();
     if(date.getHours() != HeureLancement){
             HeureLancement = date.getHours();
+
+            if(heureBG != verifHeureBG()){
+                heureBG = verifHeureBG();
+                changebg(heureBG);
+            }
 
             let isplaying = true;
             if(musique.playing() == false){
@@ -38,9 +87,6 @@ function myTimer(){
         }
     }
 }
-
-let lancement = true;
-let HeureLancement = heure;
 
 const player = document.querySelector('i');
 player.addEventListener("click", function(){
