@@ -74,6 +74,8 @@ body{
     position: absolute;
     opacity: 0;
     transition: 2s;
+    width: 100vw;
+    overflow: hidden;
 }
 
 .bgStars2{
@@ -81,14 +83,216 @@ body{
     position: absolute;
     opacity: 0;
     transition: 2s;
+    width: 100vw;
+    overflow: hidden;
 }
 
 .bgStars3{
     height: 100vh;
+    width: 100vw;
     position: absolute;
+    transition: 2s;
+    overflow: hidden;
+
     opacity: 0.8;
+    animation-name: starlight;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+
+.astre{
+    position: absolute;
+    height: 75px;
+    filter: brightness(1.5);
+    overflow: hidden;
     transition: 2s;
 }
+
+.position111{
+    top: 90%;
+    left: 6%;
+}
+
+.position222{
+    top: 90%;
+    left: 90%;
+}
+
+.position6{
+    top: 70%;
+    left: 3%;
+    filter: brightness(1);
+}
+
+.position7{
+    top: 60%;
+    left: 5%;
+    filter: brightness(1.1);
+}
+
+.position8{
+    top: 50%;
+    left: 8%;
+    filter: brightness(1.2);
+}
+
+.position9{
+    top: 40%;
+    left: 10%;
+    filter: brightness(1.3);
+}
+
+.position10{
+    top: 25%;
+    left: 20%;
+    filter: brightness(1.4);
+
+    animation-name: sunshine;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+
+.position11{
+    top: 15%;
+    left: 30%;
+    filter: brightness(1.4);
+
+    animation-name: sunshine;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+
+/*ZENITH*/
+.position12{
+    top: 5%;
+    left: 47%;
+    filter: brightness(1.5);
+
+    animation-name: sunshine;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+/*------*/
+.position13{
+    top: 15%;
+    left: 65%;
+    filter: brightness(1.4);
+
+    animation-name: sunshine;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+
+.position14{
+    top: 25%;
+    left: 75%;
+    filter: brightness(1.4);
+
+    animation-name: sunshine;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+
+.position15{
+    top: 40%;
+    left: 80%;
+    filter: brightness(1.3);
+}
+
+.position16{
+    top: 50%;
+    left: 88%;
+    filter: brightness(1.2);
+}
+
+.position17{
+    top: 60%;
+    left: 90%;
+    filter: brightness(1.1);
+}
+
+.position18{
+    top: 70%;
+    left: 91%;
+    filter: brightness(1);
+}
+
+.position19{
+    top: 90%;
+    left: 6%;
+}
+
+/*DEBUT DE LA NUIT */
+.position20{
+    top: 70%;
+    left: 3%;
+    filter: brightness(100);
+    transform: scale(0.8);
+}
+
+.position21{
+    top: 60%;
+    left: 5%;
+    filter: brightness(100);
+    transform: scale(0.8);
+}
+
+.position22{
+    top: 50%;
+    left: 8%;
+    filter: brightness(100);
+    transform: scale(0.8);
+}
+
+.position23{
+    top: 40%;
+    left: 10%;
+    filter: brightness(100);
+    transform: scale(0.8);
+}
+
+.position24{
+    top: 25%;
+    left: 20%;
+    filter: brightness(100);
+    transform: scale(0.8);
+}
+
+.position1{
+    top: 15%;
+    left: 30%;
+    filter: brightness(100);
+    transform: scale(0.8);
+}
+
+.position2{
+    top: 5%;
+    left: 47%;
+    filter: brightness(100);
+    transform: scale(0.8);
+}
+
+.position3{
+    top: 15%;
+    left: 65%;
+    filter: brightness(100);
+    transform: scale(0.8);
+}
+
+.position4{
+    top: 25%;
+    left: 75%;
+    filter: brightness(100);
+    transform: scale(0.8);
+}
+
+.position5{
+    top: 40%;
+    left: 80%;
+    filter: brightness(100);
+    transform: scale(0.8);
+}
+
 
 .nuage1{
     position: absolute;
@@ -97,6 +301,7 @@ body{
     animation-name: cloud2;
     animation-duration: 10s;
     animation-iteration-count: infinite;
+    overflow: hidden;
 }
 
 .nuage2{
@@ -107,6 +312,7 @@ body{
     animation-name: cloud;
     animation-duration: 10s;
     animation-iteration-count: infinite;
+    overflow: hidden;
 }
 
 .pageIn{
@@ -120,11 +326,21 @@ body{
     z-index: 9999;
 }
 
+.pageIn article{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: center;
+    align-items: center;
+    width: 25%;
+    z-index: 9999;
+}
+
 .pageInBG1Class{
     height: 100vh;
     width: 100%;
     position: absolute;
-    background-image: url("medias/Plaine\ flat.png");
+    background-image: url("medias/Plaine\ flat2.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -146,11 +362,14 @@ body{
 }
 
 #heure{
-    font-size: 150px;
+    font-size: 170px;
     margin-top: 0px;
     margin-bottom: 0px;
-    font-family: 'Quicksand', sans-serif;
-    margin-bottom: 5%;
+    font-family: 'Cutive Mono', monospace;
+    margin-bottom: 2%;
+    letter-spacing: -30px;
+    font-variant-numeric: tabular-nums;
+    font-weight: normal;
 }
 
 .musiccontainer{
@@ -160,12 +379,16 @@ body{
     justify-content: center;
     align-content: center;
     align-items: center;
+    margin-top: 3%;
+    display: none;
+    text-align: center;
 }
 
 #playpause{
     font-size: 100px;
-    transition: 2s;
+    transition: color 2s, transform 0.2s;
     z-index: 9999;
+    margin-bottom: 3%;
 }
   
 #playpause:hover{
@@ -178,10 +401,10 @@ body{
   
 .slider{
     -webkit-appearance: none;
-    width: 20%;
+    width: 28%;
     height: 15px;
     border-radius: 5px;
-    background: #d3d3d3;
+    background: #e4e4e4;
     outline: none;
     opacity: 0.9;
     transition: 0.3s;
@@ -199,6 +422,7 @@ body{
     height: 25px;
     border-radius: 50%;
     cursor: pointer;
+    z-index: 9999;
 }
   
 .slider::-moz-range-thumb{
@@ -206,6 +430,23 @@ body{
     height: 25px;
     border-radius: 50%;
     cursor: pointer;
+    z-index: 9999;
+}
+
+
+#volume{
+    font-size: 100px;
+    transition: color 2s, transform 0.2s;
+    z-index: 9999;
+    margin-bottom: 3%;
+}
+
+#volume:hover{
+    cursor: pointer;
+}
+
+#volume:active{
+    transform: scale(0.9);
 }
 
 @keyframes cloud{
@@ -236,6 +477,34 @@ body{
     }
 }
 
+@keyframes starlight{
+    0% {
+      opacity: 0.5;
+    }
+
+    50%{
+        opacity: 1;
+    }
+
+    100%{
+        opacity: 0.5;
+    }
+}
+
+@keyframes sunshine{
+    0% {
+      filter: brightness(1.5);
+    }
+
+    50%{
+        filter: brightness(2);
+    }
+
+    100%{
+        filter: brightness(1.5);
+    }
+}
+
 @media (max-width: 800px){
     .nuage1{
         opacity: 0;
@@ -248,7 +517,8 @@ body{
     }
 
     #heure{
-        font-size: 20vw;
+        font-size: 22vw;
+        letter-spacing: -15px;
     }
 
     #playpause{
@@ -256,6 +526,10 @@ body{
     }
 
     .slider{
+        width: 70%;
+    }
+
+    .pageIn article{
         width: 50%;
     }
 }

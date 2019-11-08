@@ -6,20 +6,26 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style.css">
     <script src="node_modules/howler/dist/howler.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cutive+Mono&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="medias/Leaf.png" type="image/x-icon">
     <title>MusicHours</title>
 </head>
 <body>    
     <section class="pageOut bg1" id="b1">
+        <img src="medias/Soleil.png" alt="" class="astre">
         <img class="nuage1 nuageImage1" src="medias/nuage1.png" alt="">
         <img class="nuage2 nuageImage1" src="medias/nuage2.png" alt="">
         <img src="medias/BgStars.png" alt="" class="bgStars1">
         <div class="pageInBG1Class" id="pageInBG1"></div>
         <section class="pageIn">
             <p id="heure" class="c1"></p>
-            <div class="musiccontainer">
+            <article>
                 <i class="material-icons c1" id="playpause">play_circle_outline</i>
+                <i class="material-icons c1" id="volume">volume_down</i>
+            </article>
+            <div class="musiccontainer" id="panel">
                 <input type="range" min="0" max="100" value="50" class="slider cbg1" id="myRange">
             </div>
         </section>        

@@ -2,7 +2,7 @@ let now = new Date();
 let heure = now.getHours();
 let musique = new Howl({
     src: [`musiques/normal/${heure}.mp3`],
-    autoplay: true,
+    autoplay: false,
     loop: true,
     volume: 0.5
 });
@@ -10,12 +10,14 @@ let musique = new Howl({
 const afficheHeure = document.querySelector('#heure');
 const BgColor = document.querySelector('#b1');
 const BgInColor = document.querySelector('#pageInBG1');
+const Mouvement = document.querySelector(".astre");
 const NuageImage1 = document.querySelector('.nuage1');
 const NuageImage2 = document.querySelector('.nuage2');
 const BgEtoiles = document.querySelector('.bgStars1');
 const TextColor = document.querySelector('#heure');
 const PlayerColor = document.querySelector('#playpause');
 const SliderColor = document.querySelector('#myRange');
+const VolumeIcon = document.querySelectorAll('#volume');
 
 let lancement = true;
 let HeureLancement = heure;
@@ -23,10 +25,10 @@ let HeureLancement = heure;
 function verifHeureBG(){
     let heureBGF;
 
-    if(HeureLancement <= 6  && HeureLancement >= 20){
+    if(HeureLancement <= 5  || HeureLancement >= 20){
         heureBGF = 3;
     }
-    else if(HeureLancement == 7 || HeureLancement == 8 || HeureLancement == 18 || HeureLancement == 19){
+    else if(HeureLancement == 6 || HeureLancement == 7 || HeureLancement == 18 || HeureLancement == 19){
         heureBGF = 2;
     }
     else{
@@ -35,6 +37,25 @@ function verifHeureBG(){
 
     return heureBGF;
 }
+
+function changeMouvement(){
+    if(HeureLancement == 6){
+        Mouvement.className = "astre position222";
+        setTimeout(resetPosAstre, 2000);
+        function resetPosAstre(){
+            Mouvement.className = "astre position111";
+        }
+        setTimeout(resetPosAstre2, 2000);
+        function resetPosAstre2(){
+            Mouvement.className = "astre position6";
+        }
+    }
+    else{
+        Mouvement.className = `astre position${HeureLancement}`;
+    }
+}
+
+changeMouvement();
 
 var heureBG = verifHeureBG();
 
@@ -46,6 +67,7 @@ function changebg(valeurBG){
     BgEtoiles.className = `bgStars${valeurBG}`;
     TextColor.className = `c${valeurBG}`;
     PlayerColor.className = `c${valeurBG} material-icons`;
+    VolumeIcon[0].className = `c${valeurBG} material-icons`;
     SliderColor.className = `cbg${valeurBG} slider`;
 }
 
@@ -57,8 +79,10 @@ var Timer = setInterval(myTimer);
 function myTimer(){
     let date = new Date();
     afficheHeure.innerHTML = date.toLocaleTimeString();
-    if(date.getHours() != HeureLancement){
+    if(date.getHours() != HeureLancement){ //Permet de savoir quand il y a un changement d'heure
             HeureLancement = date.getHours();
+
+            changeMouvement();
 
             if(heureBG != verifHeureBG()){
                 heureBG = verifHeureBG();
@@ -70,7 +94,7 @@ function myTimer(){
                 isplaying = false;
             }
 
-            musique.fade(1,0, 2000);
+            musique.fade(slider.value/100, 0, 2000);
             setTimeout(musiquechange1, 2000); 
             function musiquechange1(){
                 musique.pause();
@@ -81,7 +105,7 @@ function myTimer(){
                     musique.play();
                     setTimeout(musiquechange2, 1000); 
                      function musiquechange2(){
-                        musique.fade(0,1, 1000);
+                        musique.fade(0, slider.value/100, 1000);
                 } 
             }
         }
@@ -119,7 +143,7 @@ Howler.volume(slider.value/100);
 
 slider.oninput = function() {
     Howler.volume(slider.value/100);
-    if(slider.value/100 == 0){
+    /*if(slider.value/100 == 0){
         player.innerHTML = "play_circle_outline";
         musique.pause();
     }
@@ -128,5 +152,11 @@ slider.oninput = function() {
             player.innerHTML = "pause_circle_outline";
             musique.play();
         }
-    }
+    }*/
 }
+
+$(document).ready(function(){
+    $("#volume").click(function(){
+        $(".musiccontainer").slideToggle("slow");
+    });
+});
