@@ -1,6 +1,50 @@
 body{
     margin: 0px;
 }
+
+.prePage{
+    height: 100vh;
+    width: 100%;
+    transition: 2s;
+    position: absolute;
+    z-index: 9999;
+    background-attachment: white;
+
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+
+    font-family: 'Cutive Mono', monospace;
+}
+
+.prePage button{
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #6aabe9;
+    border: solid 2px #6aabe9;
+    font-family: 'Comfortaa', cursive;
+    font-size: 20px;
+    padding: 15px 10px 15px 10px;
+    border-radius: 5px;
+    color: white;
+    margin-left: 40%;
+    margin-right: 40%;
+    margin-top: 25px;
+    margin-bottom: 75px;
+    
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+.prePage button:hover{
+      background-color: white;
+      color: black;
+      transition: background-color 0.3s, color 0.3s;
+}
+
 .pageOut{
     height: 100vh;
     width: 100%;
@@ -19,6 +63,23 @@ body{
 }
 
 .bg3{
+    background-color: rgb(2, 13, 29);
+    transition: 2s;
+}
+
+.bgPluie1{
+    background-color: rgb(51, 51, 51);
+    background-image: linear-gradient(rgba(202, 232, 252, 0),rgb(214, 224, 233));
+    transition: 2s;
+}
+
+.bgPluie2{
+    background-color: rgb(26, 26, 26);
+    background-image: linear-gradient(rgba(202, 232, 252, 0),rgb(235, 167, 79));
+    transition: 2s;
+}
+
+.bgPluie3{
     background-color: rgb(2, 13, 29);
     transition: 2s;
 }
@@ -53,6 +114,37 @@ body{
     transition: 2s;
 }
 
+.cPluie1{
+    color: white;
+    transition: 2s;
+}
+
+.cbgPluie1::-webkit-slider-thumb{
+    background: white;
+    transition: 2s;
+}
+
+.cPluie2{
+    color: white;
+    transition: 2s;
+}
+
+.cbgPluie2::-webkit-slider-thumb{
+    background: white;
+    transition: 2s;
+}
+
+.cPluie3{
+    color: white;
+    transition: 2s;
+}
+
+.cbgPluie3::-webkit-slider-thumb{
+    background: white;
+    transition: 2s;
+}
+
+
 .nuageImage1{
     opacity: 1;
     transition: 2s;
@@ -67,6 +159,24 @@ body{
 .nuageImage3{
     opacity: 0;
     transition: 2s;
+}
+
+.nuageImagePluie1{
+    opacity: 0;
+    transition: 2s;
+    filter: contrast(50%);
+}
+
+.nuageImagePluie2{
+    opacity: 0;
+    transition: 2s;
+    filter: contrast(50%);
+}
+
+.nuageImagePluie3{
+    opacity: 0;
+    transition: 2s;
+    filter: contrast(50%);
 }
 
 .bgStars1{
@@ -98,6 +208,74 @@ body{
     animation-name: starlight;
     animation-duration: 5s;
     animation-iteration-count: infinite;
+}
+
+.bgStarsPluie1{
+    height: 100vh;
+    position: absolute;
+    opacity: 0;
+    transition: 2s;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.bgStarsPluie2{
+    height: 100vh;
+    position: absolute;
+    opacity: 0;
+    transition: 2s;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.bgStarsPluie3{
+    height: 100vh;
+    position: absolute;
+    opacity: 0.5;
+    transition: 2s;
+    width: 100vw;
+    overflow: hidden;
+}
+
+
+.bgRain1{
+    height: 100vh;
+    position: absolute;
+    opacity: 0.7;
+    transition: 2s;
+    width: 100vw;
+    overflow: hidden;
+    filter: brightness(1) blur(0px);
+}
+
+.bgRain2{
+    height: 100vh;
+    position: absolute;
+    opacity: 0.5;
+    transition: 2s;
+    width: 100vw;
+    overflow: hidden;
+    filter: brightness(0.6) blur(0px);
+}
+
+.bgRain3{
+    height: 100vh;
+    position: absolute;
+    opacity: 1;
+    transition: 2s;
+    width: 100vw;
+    overflow: hidden;
+    filter: brightness(0.1) blur(0px);
+}
+
+.bgRainNormal{
+    height: 100vh;
+    position: absolute;
+    opacity: 0;
+    transition: 2s;
+    width: 100vw;
+    overflow: hidden;
+    filter: brightness(1) blur(0px);
 }
 
 .astre{
@@ -251,11 +429,13 @@ body{
     transform: scale(0.8);
 }
 
-.position24{
+.position0{
     top: 25%;
     left: 20%;
     filter: brightness(100);
     transform: scale(0.8);
+    opacity: 1;
+    z-index: 1;
 }
 
 .position1{
@@ -323,7 +503,7 @@ body{
     justify-content: center;
     align-content: center;
     align-items: center;
-    z-index: 9999;
+    z-index: 99999999;
 }
 
 .pageIn article{
@@ -332,8 +512,8 @@ body{
     justify-content: space-around;
     align-content: center;
     align-items: center;
-    width: 25%;
-    z-index: 9999;
+    width: 30%;
+    z-index: 9999999;
 }
 
 .pageInBG1Class{
@@ -357,7 +537,22 @@ body{
 }
 
 #pageInBG3{
-    filter: brightness(0.3);
+    filter: brightness(0);
+    transition: 2s;
+}
+
+#pageInBGPluie1{
+    filter: brightness(0.6);
+    transition: 2s;
+}
+
+#pageInBGPluie2{
+    filter: brightness(0.4);
+    transition: 2s;
+}
+
+#pageInBGPluie3{
+    filter: brightness(0);
     transition: 2s;
 }
 
@@ -433,6 +628,21 @@ body{
     z-index: 9999;
 }
 
+#locationButton{
+    font-size: 100px;
+    transition: color 2s, transform 0.2s;
+    z-index: 9999;
+    margin-bottom: 3%;
+}
+
+#locationButton:hover{
+    cursor: pointer;
+    transform: rotate(-45deg);
+}
+
+#locationButton:active{
+    transform: scale(0.9) rotate(-45deg);
+}
 
 #volume{
     font-size: 100px;
@@ -516,6 +726,10 @@ body{
         animation-name: unset;
     }
 
+    .astre{
+      display: none;
+    }
+
     #heure{
         font-size: 22vw;
         letter-spacing: -15px;
@@ -533,3 +747,99 @@ body{
         width: 50%;
     }
 }
+
+/* TEST */
+
+
+  
+  body {
+    overflow: hidden;
+  }
+  
+  .rain {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 0;
+
+    margin-top: 60vh;
+    transition: 1s;
+  }
+
+  .rainNormal{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 0;
+
+    opacity: 0;
+    margin-top: 60vh;
+    transition: 2s;
+  }
+
+  .rainVisible{
+    opacity: 1;
+    transition: 2s;
+  }
+
+  .rainInvisible{
+    opacity: 0;
+    transition: 2s;
+  }
+  
+  .rain.back-row {
+    display: none;
+    z-index: 0;
+    bottom: 60px;
+    opacity: 0.5;
+  }
+  
+  body.back-row-toggle .rain.back-row {
+    display: block;
+  }
+  
+  .drop {
+    position: absolute;
+    bottom: 100%;
+    width: 15px;
+    height: 400px;
+    pointer-events: none;
+    animation: drop 0.5s linear infinite;
+  }
+  
+  @keyframes drop {
+    0% {
+      transform: translateY(0vh);
+    }
+    75% {
+      transform: translateY(100vh);
+    }
+    100% {
+      transform: translateY(100vh);
+    }
+  }
+
+  .stem {
+    width: 1px;
+    height: 60%;
+    margin-left: 7px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.25));
+    animation: stem 0.5s linear infinite;
+  }
+  
+  @keyframes stem {
+    0% {
+      opacity: 1;
+    }
+    65% {
+      opacity: 1;
+    }
+    75% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
