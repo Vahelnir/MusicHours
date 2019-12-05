@@ -1,23 +1,32 @@
 /*const PageOk = document.querySelector('.pageOut');
-const FirstPage = document.querySelector('.prePage')
-PageOk.style.opacity = 1;
-FirstPage.style.opacity = 0;
+const FirstPage = document.querySelector('.prePage');
+const FirstPageForm = document.querySelector('form');
+const FirstPageButton = document.querySelector('button');
 
-let key = '';
-let units = 'metrics';
-
-let localisation = "Grenoble";
-var valeurMeteoOK = "unset";
-
-function searchWeather(ville){
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${ville}&APPID=${key}&units=${units}`)
-    .then(response => response.json())
-    .then(result => {
-        console.log(result);
-        valeurMeteoOK = result.weather[0].main;
-        console.log(valeurMeteoOK);
-        return valeurMeteoOK;
-});
+if(localStorage.getItem("ville") == ""){
+    PageOk.style.opacity = 0;
+    FirstPage.style.opacity = 1;
+}
+else{
+    PageOk.style.opacity = 1;
+    FirstPage.style.opacity = 0;
+    searchWeather(localStorage.getItem("ville"));
 }
 
-console.log(searchWeather("Nantes"));*/
+document.querySelector('input').focus();
+
+FirstPageForm.addEventListener("submit", function(e){
+    let FirstPageInput = document.forms["form"]["ville"].value;
+    if(FirstPageInput == ""){
+        alert("Entre quelque chose ptn");
+    }
+    else{
+        searchWeather(FirstPageInput);
+    }
+    e.preventDefault();
+});
+
+function resetVille(){
+    localStorage.setItem("ville", "");
+}
+*/

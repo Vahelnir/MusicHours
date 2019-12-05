@@ -8,15 +8,19 @@
     <script src="node_modules/howler/dist/howler.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Cutive+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cutive+Mono|Quicksand&display=swap" rel="stylesheet">
 
     <link rel="shortcut icon" href="medias/Leaf.png" type="image/x-icon">
 
     <title>MusicHours</title>
 </head>
 <body>    
-    <section class="prePage">
-        <button>Test</button>
+    <section class="prePage pageInBG1Class bg1">
+        <h1>Entrez votre ville :</h1>
+        <form name="form">
+            <input type="text" name="ville">
+            <button type="submit">Confirmer</button>
+        </form>
     </section>
     <section class="pageOut bg1" id="b1">
         <img src="medias/Soleil.png" alt="" class="astre">
@@ -40,7 +44,6 @@
                 <input type="range" min="0" max="100" value="50" class="slider cbg1" id="myRange">
             </div>
         </section>        
-        <script src="js/meteo.js"></script>
         <script src="js/main.js"></script>
     </section> 
 </body>

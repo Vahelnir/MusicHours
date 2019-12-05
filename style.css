@@ -15,34 +15,70 @@ body{
     justify-content: center;
     align-items: center;
     align-content: center;
+    font-family: 'Quicksand', sans-serif;
+}
 
-    font-family: 'Cutive Mono', monospace;
+.prePage h1{
+    font-size: 40px;
+    letter-spacing: 5px;
+    color: rgb(57, 120, 161);
+}
+
+.prePage form{
+    width: 30%;
 }
 
 .prePage button{
+    font-family: 'Quicksand', sans-serif;
     text-decoration: none;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #6aabe9;
-    border: solid 2px #6aabe9;
-    font-family: 'Comfortaa', cursive;
+    background-color: rgb(57, 120, 161);
+    border: solid 2px rgb(57, 120, 161);
     font-size: 20px;
-    padding: 15px 10px 15px 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     border-radius: 5px;
     color: white;
-    margin-left: 40%;
-    margin-right: 40%;
     margin-top: 25px;
     margin-bottom: 75px;
+    width: 100%;
+    opacity: 0.8;
     
     transition: background-color 0.3s, color 0.3s;
-  }
+}
 
 .prePage button:hover{
-      background-color: white;
-      color: black;
+      background-color: rgba(255, 255, 255, 0);
+      color: rgb(44, 90, 121);
       transition: background-color 0.3s, color 0.3s;
+      cursor: pointer;
+}
+
+.prePage input{
+    padding: 12px 20px;
+    margin-bottom: 2%;
+    box-sizing: border-box;
+    width: 100%;
+    color: rgb(53, 53, 53);
+    text-transform: capitalize;
+    border: none;
+    border-bottom: 2px solid rgb(57, 120, 161);
+    transition: 0.3s;
+    outline: none;
+    border-radius: 0px;
+    background: none;
+    caret-color: rgb(57, 120, 161);
+    color: rgb(57, 120, 161);
+    font-size: 25px;
+    text-align: center;
+    opacity: 0.8;
+}
+  
+.prePage input:focus{
+    border: none;
+    border-bottom: 2px solid rgb(43, 98, 134);
 }
 
 .pageOut{
@@ -237,6 +273,15 @@ body{
     overflow: hidden;
 }
 
+.bgRain{
+    height: 100vh;
+    position: absolute;
+    opacity: 0;
+    transition: 2s;
+    width: 100vw;
+    overflow: hidden;
+    filter: brightness(1) blur(0px);
+}
 
 .bgRain1{
     height: 100vh;
@@ -637,11 +682,10 @@ body{
 
 #locationButton:hover{
     cursor: pointer;
-    transform: rotate(-45deg);
 }
 
 #locationButton:active{
-    transform: scale(0.9) rotate(-45deg);
+    transform: scale(0.9);
 }
 
 #volume{

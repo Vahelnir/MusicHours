@@ -1,41 +1,42 @@
-const PageOk = document.querySelector('.pageOut');
-const FirstPage = document.querySelector('.prePage')
-PageOk.style.opacity = 1;
-FirstPage.style.opacity = 0;
-
 let key = '';
 let units = 'metrics';
 
-let localisation = "Grenoble";
 var valeurMeteoOK = "unset";
+let firstPage = false;
 
-function changeLocation(){
-    let location = prompt("Entrez votre ville :");
-    searchWeather(location);
+const PageOk = document.querySelector('.pageOut');
+const FirstPage = document.querySelector('.prePage');
+const FirstPageForm = document.querySelector('form');
+const FirstPageButton = document.querySelector('button');
+
+if(localStorage.getItem("ville") == ""){
+    PageOk.style.opacity = 0;
+    FirstPage.style.opacity = 1;
+}
+else{
+    PageOk.style.opacity = 1;
+    FirstPage.style.opacity = 0;
+    searchWeather(localStorage.getItem("ville"));
 }
 
-function searchWeather(ville){
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${ville}&APPID=${key}&units=${units}`)
-    .then(response => response.json())
-    .then(result => {
-        //console.log(result);
-        valeurMeteoOK = result.weather[0].main;
-        console.log(`Il fait ${valeurMeteoOK} à ${result.name}`);
-        if(valeurMeteoOK == "Rain"){
-            valeurMeteoTEMP = "pluie";
-        }
-        else{
-            valeurMeteoTEMP = "normal";
-        }
-        changebg(verifHeureBG());
+document.querySelector('input').focus();
+
+FirstPageForm.addEventListener("submit", function(e){
+    let FirstPageInput = document.forms["form"]["ville"].value;
+    if(FirstPageInput == ""){
+        alert("Entre quelque chose ptn");
+    }
+    else{
+        searchWeather(FirstPageInput);
+    }
+    e.preventDefault();
 });
-}
 
-let valeurMeteo = ["normal", "pluie"];
+function resetVille(){
+    localStorage.setItem("ville", "");
+}
 
 let valeurMeteoTEMP = "normal";
-
-searchWeather("Nantes");
 
 let now = new Date();
 let heure = now.getHours();
@@ -45,6 +46,67 @@ let musique = new Howl({
     loop: true,
     volume: 0.5
 });
+
+function changeLocation(){
+    localisation = prompt("Entrez votre ville :");
+    searchWeather(localisation);
+}
+
+function searchWeather(ville){
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${ville}&APPID=${key}&units=${units}`)
+    .then(response => response.json())
+    .then(result => {
+        console.log(result);
+        if(result.cod == 404){
+            alert("Ville Introuvable !");
+            document.querySelector('input').value = "";
+        }
+        else{
+            localStorage.setItem("ville", ville);
+            console.log(localStorage.getItem("ville"));
+            PageOk.style.opacity = 1;
+            FirstPage.style.opacity = 0;
+
+            valeurMeteoOK = result.weather[0].main;
+            console.log(`Il fait ${valeurMeteoOK} à ${result.name}`);
+            if(valeurMeteoOK == "Rain"){
+                valeurMeteoTEMP = "pluie";
+            }
+            else{
+                valeurMeteoTEMP = "normal";
+            }
+            changebg(verifHeureBG());
+            let isplaying = true;
+            if(musique.playing() == false){
+                isplaying = false;
+            }
+    
+            if(firstPage == true){
+            musique.fade(slider.value/100, 0, 2000);
+            setTimeout(musiquechange1, 2000); 
+            function musiquechange1(){
+                musique.pause();
+                musique.unload();
+                musique._src = `musiques/${valeurMeteoTEMP}/${HeureLancement}.mp3`;
+                musique.load();
+                if(isplaying == true){
+                    musique.play();
+                    setTimeout(musiquechange2, 1000); 
+                     function musiquechange2(){
+                        musique.fade(0, slider.value/100, 1000);
+                        } 
+                    }
+                }
+            }
+            else{
+                firstPage = true;
+                musique.unload();
+                musique._src = `musiques/${valeurMeteoTEMP}/${HeureLancement}.mp3`;
+                musique.load();
+            }
+        }
+});
+}
 
 /*Pour la pluie !*/
 
@@ -190,7 +252,7 @@ function changebg(valeurBG){
     }
 }
 
-changebg(heureBG);
+//changebg(heureBG);
 
 LocationButton.addEventListener("click", function(){
     changeLocation();
@@ -207,34 +269,14 @@ function myTimer(){
     if(date.getHours() != HeureLancement && tempverif == true){ //Permet de savoir quand il y a un changement d'heure
             tempverif = false;
             HeureLancement = date.getHours();
+            searchWeather(localisation);
 
             if(heureBG != verifHeureBG()){
                 heureBG = verifHeureBG();
                 changebg(heureBG);
             }
 
-            let isplaying = true;
-            if(musique.playing() == false){
-                isplaying = false;
-            }
-
-            changeMouvement();
-
-            musique.fade(slider.value/100, 0, 2000);
-            setTimeout(musiquechange1, 2000); 
-            function musiquechange1(){
-                musique.pause();
-                musique.unload();
-                musique._src = `musiques/${valeurMeteoTEMP}/${HeureLancement}.mp3`;
-                musique.load();
-                if(isplaying == true){
-                    musique.play();
-                    setTimeout(musiquechange2, 1000); 
-                     function musiquechange2(){
-                        musique.fade(0, slider.value/100, 1000);
-                } 
-            }
-        }
+        changeMouvement();
         tempverif = true;
     }
 }
@@ -287,7 +329,7 @@ slider.oninput = function() {
 document.addEventListener('keydown', logKey);
 
 function logKey(e) {
-  if(e.code == 'Space'){
+  if(e.code == 'Space' && firstPage == true){
     playpause();
   } 
 }
@@ -297,3 +339,4 @@ $(document).ready(function(){
         $(".musiccontainer").slideToggle("slow");
     });
 });
+
