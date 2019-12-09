@@ -15,33 +15,41 @@
     <title>MusicHours</title>
 </head>
 <body>    
-    <section class="prePage pageInBG1Class bg1">
+    <section class="prePage pageInBG1Class bgNormal1">
         <h1>Entrez votre ville :</h1>
         <form name="form">
-            <input type="text" name="ville">
+            <input type="text" name="ville" placeholder="Ex : Grenoble, Paris, Nantes">
             <button type="submit">Confirmer</button>
         </form>
     </section>
-    <section class="pageOut bg1" id="b1">
+    <section class="pageOut bg1 bgNormal1" id="b1">
         <img src="medias/Soleil.png" alt="" class="astre">
 
         <div class="rain rainInvisible front-row"></div>
 
-        <img class="nuage1 nuageImage1" src="medias/nuage1.png" alt="">
-        <img class="nuage2 nuageImage1" src="medias/nuage2.png" alt="">
-        <img src="medias/BgStars.png" alt="" class="bgStars1">
+        <img class="nuage1 nuageImage1 nuageImageNormal1" src="medias/nuage1.png" alt="">
+        <img class="nuage2 nuageImage1 nuageImageNormal1" src="medias/nuage2.png" alt="">
+        <img src="medias/BgStars.png" alt="" class="bgStars1 bgStarsNormal1">
         <img src="medias/NuagesPluie.png" alt="" class="bgRain" id="bgRainSelector">
         <div class="pageInBG1Class" id="pageInBG1"></div>
 
         <section class="pageIn">
-            <p id="heure" class="c1"></p>
+            <p id="heure" class="c1 cNormal1"></p>
             <article>
-                <i class="material-icons c1" id="playpause">play_circle_outline</i>
-                <i class="material-icons c1" id="volume">volume_down</i>
-                <i class="material-icons c1" id="locationButton">my_location</i>
+                <i class="material-icons c1 cNormal1" id="playpause">play_circle_outline</i>
+                <i class="material-icons c1 cNormal1" id="volume">volume_down</i>
+                <i class="material-icons c1 cNormal1" id="locationButton">my_location</i>
             </article>
-            <div class="musiccontainer" id="panel">
-                <input type="range" min="0" max="100" value="50" class="slider cbg1" id="myRange">
+            <div class="musiccontainer">
+                <input type="range" min="0" max="100" value="50" class="slider cbg1 cbgNormal1" id="myRange">
+            </div>
+            <div class="cityPos">
+                <h1 class="c1 cNormal1"></h1>
+                <form name="villeForm">
+                        <input type="text" name="villePos">
+                        <button class="cityPosButtonColorNormal1">Changer</button>
+                </form>
+                <button class="cityPosButtonColorNormal1">Réinitialiser la ville</button>
             </div>
         </section>        
         <script src="js/main.js"></script>

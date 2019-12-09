@@ -3,11 +3,24 @@ let units = 'metrics';
 
 var valeurMeteoOK = "unset";
 let firstPage = false;
+let changementHeure = false;
 
-const PageOk = document.querySelector('.pageOut');
+//setTimeout(clear, 1);
+
+function clear(){
+    window.console.clear();
+}
+
+//Selecteurs au chargement de la page, quand un utilisateur se log pour la première fois
+const PageOk = document.querySelector('.pageOut'); //Page à afficher une fois que la localisation est entrée
+
 const FirstPage = document.querySelector('.prePage');
 const FirstPageForm = document.querySelector('form');
 const FirstPageButton = document.querySelector('button');
+
+const cityPosTitre = document.querySelector('.cityPos h1');
+const cityPosForm = document.querySelector('.cityPos form');
+const cityPosReset = document.querySelectorAll('.cityPos button')[1];
 
 if(localStorage.getItem("ville") == ""){
     PageOk.style.opacity = 0;
@@ -19,12 +32,14 @@ else{
     searchWeather(localStorage.getItem("ville"));
 }
 
+//Permet de mettre le curseur sur le champ de texte
 document.querySelector('input').focus();
+
 
 FirstPageForm.addEventListener("submit", function(e){
     let FirstPageInput = document.forms["form"]["ville"].value;
     if(FirstPageInput == ""){
-        alert("Entre quelque chose ptn");
+        alert("Votre champ est vide !");
     }
     else{
         searchWeather(FirstPageInput);
@@ -32,12 +47,34 @@ FirstPageForm.addEventListener("submit", function(e){
     e.preventDefault();
 });
 
+cityPosForm.addEventListener("submit", function(e){
+    let cityPosFormInput = document.forms["villeForm"]["villePos"].value;
+    if(cityPosFormInput == ""){
+        alert("Votre champ est vide !");
+    }
+    else{
+        searchWeather(cityPosFormInput);
+        document.forms["villeForm"]["villePos"].value = "";
+    }
+    e.preventDefault();
+});
+
 function resetVille(){
     localStorage.setItem("ville", "");
+    PageOk.style.opacity = 0;
+    FirstPage.style.opacity = 1;
+    firstPage = false;
+    document.querySelector('input').value = "";
+    document.querySelector('input').focus();
+    if(musique.playing()){
+        musique.fade(slider.value/100, 0, 2000);
+        setTimeout(musiquechange1, 2000); 
+    }
 }
 
-let valeurMeteoTEMP = "normal";
+cityPosReset.addEventListener("click", resetVille);
 
+let valeurMeteoTEMP = "normal";
 let now = new Date();
 let heure = now.getHours();
 let musique = new Howl({
@@ -47,11 +84,13 @@ let musique = new Howl({
     volume: 0.5
 });
 
+
 function changeLocation(){
-    localisation = prompt("Entrez votre ville :");
+    let localisation = prompt("Entrez votre ville :");
     searchWeather(localisation);
 }
 
+//Coeur du programme, permet de chercher la météo et change la musique, l'arière plan et la position du soleil
 function searchWeather(ville){
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${ville}&APPID=${key}&units=${units}`)
     .then(response => response.json())
@@ -67,45 +106,52 @@ function searchWeather(ville){
             PageOk.style.opacity = 1;
             FirstPage.style.opacity = 0;
 
-            valeurMeteoOK = result.weather[0].main;
-            console.log(`Il fait ${valeurMeteoOK} à ${result.name}`);
-            if(valeurMeteoOK == "Rain"){
-                valeurMeteoTEMP = "pluie";
+            if(valeurMeteoOK == result.weather[0].main && !changementHeure){
+                console.log("La météo n'a pas changé");
             }
             else{
-                valeurMeteoTEMP = "normal";
-            }
-            changebg(verifHeureBG());
-            let isplaying = true;
-            if(musique.playing() == false){
-                isplaying = false;
-            }
-    
-            if(firstPage == true){
-            musique.fade(slider.value/100, 0, 2000);
-            setTimeout(musiquechange1, 2000); 
-            function musiquechange1(){
-                musique.pause();
-                musique.unload();
-                musique._src = `musiques/${valeurMeteoTEMP}/${HeureLancement}.mp3`;
-                musique.load();
-                if(isplaying == true){
-                    musique.play();
-                    setTimeout(musiquechange2, 1000); 
-                     function musiquechange2(){
-                        musique.fade(0, slider.value/100, 1000);
-                        } 
+                changementHeure = false;
+                valeurMeteoOK = result.weather[0].main;
+                console.log(`Il fait ${valeurMeteoOK} à ${result.name}`);
+                cityPosTitre.innerHTML = `Entrez votre nouvelle ville (actuellement ${result.name}) :`;
+                if(valeurMeteoOK == "Rain"){
+                    valeurMeteoTEMP = "Pluie";
+                }
+                else{
+                    valeurMeteoTEMP = "Normal";
+                }
+                changebg(verifHeureBG());
+                let isplaying = true;
+                if(musique.playing() == false){
+                    isplaying = false;
+                }
+        
+                if(firstPage == true){
+                musique.fade(slider.value/100, 0, 2000);
+                setTimeout(musiquechange1, 2000); 
+                function musiquechange1(){
+                    musique.pause();
+                    musique.unload();
+                    musique._src = `musiques/${valeurMeteoTEMP}/${HeureLancement}.mp3`;
+                    musique.load();
+                    if(isplaying == true){
+                        musique.play();
+                        setTimeout(musiquechange2, 1000); 
+                        function musiquechange2(){
+                            musique.fade(0, slider.value/100, 1000);
+                            } 
+                        }
                     }
                 }
-            }
-            else{
-                firstPage = true;
-                musique.unload();
-                musique._src = `musiques/${valeurMeteoTEMP}/${HeureLancement}.mp3`;
-                musique.load();
+                else{
+                    firstPage = true;
+                    musique.unload();
+                    musique._src = `musiques/${valeurMeteoTEMP}/${HeureLancement}.mp3`;
+                    musique.load();
+                }
             }
         }
-});
+    });
 }
 
 /*Pour la pluie !*/
@@ -221,43 +267,27 @@ changeMouvement();
 var heureBG = verifHeureBG();
 
 function changebg(valeurBG){
-    if(valeurMeteoTEMP == "pluie"){
-        BgColor.className = `bgPluie${valeurBG}`;
-        BgInColor.id = `pageInBGPluie${valeurBG}`;
-        NuageImage1.className = `nuage1 nuageImagePluie${valeurBG}`;
-        NuageImage2.className = `nuage2 nuageImagePluie${valeurBG}`;
-        BgEtoiles.className = `bgStarsPluie${valeurBG}`;
-        TextColor.className = `cPluie${valeurBG}`;
+    BgColor.className = `bg${valeurMeteoTEMP}${valeurBG}`;
+    BgInColor.id = `pageInBG${valeurMeteoTEMP}${valeurBG}`;
+    RainSelector.className = 'rainNormal rainInvisible front-row';
+    NuageImage1.className = `nuage1 nuageImage${valeurMeteoTEMP}${valeurBG}`;
+    NuageImage2.className = `nuage2 nuageImage${valeurMeteoTEMP}${valeurBG}`;
+    BgEtoiles.className = `bgStars${valeurMeteoTEMP}${valeurBG}`;
+    TextColor.className = `c${valeurMeteoTEMP}${valeurBG}`;
+    PlayerColor.className = `c${valeurMeteoTEMP}${valeurBG} material-icons`;
+    LocationButton.className = `c${valeurMeteoTEMP}${valeurBG} material-icons`;
+    VolumeIcon[0].className = `c${valeurMeteoTEMP}${valeurBG} material-icons`;
+    SliderColor.className = `cbg${valeurMeteoTEMP}${valeurBG} slider`;
+    cityPosTitre.className = `c${valeurMeteoTEMP}${valeurBG}`;
+
+    if(valeurMeteoTEMP == "Pluie"){
         BgRain.className = `bgRain${valeurBG}`;
         RainSelector.className = 'rain rainVisible front-row';
-        PlayerColor.className = `cPluie${valeurBG} material-icons`;
-        LocationButton.className = `cPluie${valeurBG} material-icons`;
-        VolumeIcon[0].className = `cPluie${valeurBG} material-icons`;
-        SliderColor.className = `cbgPluie${valeurBG} slider`;
         lancerPluie();
-    }
-    else if(valeurMeteoTEMP == "normal"){
-        BgColor.className = `bg${valeurBG}`;
-        BgInColor.id = `pageInBG${valeurBG}`;
-        BgRain.className = 'bgRainNormal';
-        RainSelector.className = 'rainNormal rainInvisible front-row';
-        NuageImage1.className = `nuage1 nuageImage${valeurBG}`;
-        NuageImage2.className = `nuage2 nuageImage${valeurBG}`;
-        BgEtoiles.className = `bgStars${valeurBG}`;
-        TextColor.className = `c${valeurBG}`;
-        PlayerColor.className = `c${valeurBG} material-icons`;
-        LocationButton.className = `c${valeurBG} material-icons`;
-        VolumeIcon[0].className = `c${valeurBG} material-icons`;
-        SliderColor.className = `cbg${valeurBG} slider`;
     }
 }
 
 //changebg(heureBG);
-
-LocationButton.addEventListener("click", function(){
-    changeLocation();
-});
-
 
 //rgb(228, 156, 62)
 let tempverif = true;
@@ -268,8 +298,9 @@ function myTimer(){
     afficheHeure.innerHTML = date.toLocaleTimeString();
     if(date.getHours() != HeureLancement && tempverif == true){ //Permet de savoir quand il y a un changement d'heure
             tempverif = false;
+            changementHeure = true;
             HeureLancement = date.getHours();
-            searchWeather(localisation);
+            searchWeather(localStorage.getItem("ville"));
 
             if(heureBG != verifHeureBG()){
                 heureBG = verifHeureBG();
@@ -293,38 +324,21 @@ function playpause(){
         }
         else{
             musique.play();
-            setTimeout(mafonction, 300); 
-            function mafonction(){
-            musique.fade(0,1, 300);
             }
-        } 
     }
     else{
         player.innerHTML = "play_circle_outline";
-        musique.fade(1,0, 300);
-        setTimeout(mafonction2, 300); 
-        function mafonction2(){
-            musique.pause();
+        musique.pause();
         }
-    }
 }
 
 const slider = document.getElementById("myRange");
-Howler.volume(slider.value/100);
+musique.volume(slider.value/100);
 
-slider.oninput = function() {
-    Howler.volume(slider.value/100);
-    /*if(slider.value/100 == 0){
-        player.innerHTML = "play_circle_outline";
-        musique.pause();
-    }
-    else{
-        if(musique.playing() == false){
-            player.innerHTML = "pause_circle_outline";
-            musique.play();
-        }
-    }*/
-}
+slider.addEventListener("input", function(){
+    musique.volume(slider.value/100);
+})
+
 
 document.addEventListener('keydown', logKey);
 
@@ -337,6 +351,14 @@ function logKey(e) {
 $(document).ready(function(){
     $("#volume").click(function(){
         $(".musiccontainer").slideToggle("slow");
+        $(".cityPos").slideUp("slow");
     });
 });
+
+LocationButton.addEventListener("click", function(){
+    //changeLocation();
+    $(".cityPos").slideToggle("slow");
+    $(".musiccontainer").slideUp("slow");
+});
+
 
