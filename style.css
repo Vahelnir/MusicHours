@@ -622,6 +622,7 @@ body{
     letter-spacing: -30px;
     font-variant-numeric: tabular-nums;
     font-weight: normal;
+    z-index: 10;
 }
 
 .musiccontainer{
@@ -669,13 +670,11 @@ body{
     width: 100%;
     text-transform: capitalize;
     border: none;
-    border-bottom: 2px solid rgb(57, 120, 161);
+    border-bottom: 2px solid;
     transition: 0.3s;
     outline: none;
     border-radius: 0px;
     background: none;
-    caret-color: rgb(57, 120, 161);
-    color: rgb(57, 120, 161);
     font-size: 20px;
     text-align: center;
     opacity: 0.8;
@@ -683,8 +682,64 @@ body{
     margin-right: 1%;
 }
 
-.cityPos form input:focus{
+.cityPosInputColorNormal1{
+    border-color:rgb(57, 120, 161);
+    caret-color: rgb(57, 120, 161);
+    color: rgb(57, 120, 161);
+}
+
+.cityPosInputColorNormal1:focus{
     border-bottom: 2px solid rgb(43, 98, 134);
+}
+
+.cityPosInputColorNormal2{
+    border-color:rgb(235, 167, 79);
+    caret-color: rgb(235, 167, 79);
+    color: rgb(235, 167, 79);
+}
+
+.cityPosInputColorNormal2:focus{
+    border-bottom: 2px solid rgb(235, 167, 79);
+}
+
+.cityPosInputColorNormal3{
+    border-color:white;
+    caret-color: white;
+    color: white;
+}
+
+.cityPosInputColorNormal3:focus{
+    border-bottom: 2px solid white;
+}
+
+.cityPosInputColorPluie1{
+    border-color:white;
+    caret-color: white;
+    color: white;
+}
+
+.cityPosInputColorPluie1:focus{
+    border-bottom: 2px solid white;
+}
+
+.cityPosInputColorPluie2{
+    border-color:white;
+    caret-color: white;
+    color: white;
+}
+
+.cityPosInputColorPluie2:focus{
+    border-bottom: 2px solid white;
+}
+
+.cityPosInputColorPluie3{
+    border-color:white;
+    caret-color: white;
+    color: white;
+}
+
+.cityPosInputColorPluie3:focus{
+    border-bottom: 2px solid white;
 }
 
 .cityPos button{
@@ -725,25 +780,75 @@ body{
 }
 
 .cityPosButtonColorNormal2{
-    background-color: rgb(57, 120, 161);
-    border: solid 2px rgb(57, 120, 161);
+    background-color: rgb(235, 167, 79);
+    border: solid 2px rgb(235, 167, 79);
     color: white;
 }
 
 .cityPosButtonColorNormal2:hover{
     background-color: rgba(255, 255, 255, 0);
-    color: rgb(44, 90, 121);
+    color: rgb(235, 167, 79);
 }
 
 .cityPosButtonColorNormal3{
-    background-color: rgb(57, 120, 161);
-    border: solid 2px rgb(57, 120, 161);
-    color: white;
+    background-color: white;
+    border: solid 2px white;
+    color: rgb(2, 13, 29);
 }
 
 .cityPosButtonColorNormal3:hover{
-    background-color: rgba(255, 255, 255, 0);
-    color: rgb(44, 90, 121);
+    background-color: rgb(2, 13, 29);
+    color: white;
+}
+
+.cityPosButtonColorPluie1{
+    background-color: white;
+    border: solid 2px white;
+    color: rgb(2, 13, 29);
+}
+
+.cityPosButtonColorPluie1:hover{
+    background-color: rgba(2, 13, 29, 0);
+    color: white;
+}
+
+.cityPosButtonColorPluie2{
+    background-color: white;
+    border: solid 2px white;
+    color: rgb(2, 13, 29);
+}
+
+.cityPosButtonColorPluie2:hover{
+    background-color: rgba(2, 13, 29, 0);
+    color: white;
+}
+
+.cityPosButtonColorPluie3{
+    background-color: white;
+    border: solid 2px white;
+    color: rgb(2, 13, 29);
+}
+
+.cityPosButtonColorPluie3:hover{
+    background-color: rgba(2, 13, 29, 0);
+    color: white;
+}
+
+.cityPosFormError{
+    transition: 0.3s;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: normal;
+}
+
+.formError{
+    transition: 0.3s;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 0;
+    color: rgb(57, 120, 161);
 }
 
 #playpause{

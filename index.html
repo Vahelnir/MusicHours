@@ -18,7 +18,8 @@
     <section class="prePage pageInBG1Class bgNormal1">
         <h1>Entrez votre ville :</h1>
         <form name="form">
-            <input type="text" name="ville" placeholder="Ex : Grenoble, Paris, Nantes">
+            <input type="text" name="ville" placeholder="Ex : Grenoble, Paris, Nantes">*
+            <h2 class="c1 formError"></h2>
             <button type="submit">Confirmer</button>
         </form>
     </section>
@@ -46,9 +47,10 @@
             <div class="cityPos">
                 <h1 class="c1 cNormal1"></h1>
                 <form name="villeForm">
-                        <input type="text" name="villePos">
+                        <input type="text" name="villePos" class="cityPosInputColorNormal3">
                         <button class="cityPosButtonColorNormal1">Changer</button>
                 </form>
+                <h2 class="c1 cityPosFormError"></h2>
                 <button class="cityPosButtonColorNormal1">Réinitialiser la ville</button>
             </div>
         </section>        

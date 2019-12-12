@@ -4,7 +4,7 @@ let units = 'metrics';
 var valeurMeteoOK = "unset";
 let firstPage = false;
 let changementHeure = false;
-
+let SplashScreen = true;
 //setTimeout(clear, 1);
 
 function clear(){
@@ -17,19 +17,25 @@ const PageOk = document.querySelector('.pageOut'); //Page à afficher une fois q
 const FirstPage = document.querySelector('.prePage');
 const FirstPageForm = document.querySelector('form');
 const FirstPageButton = document.querySelector('button');
+const FirstPageFormError = document.querySelector('.formError');
 
 const cityPosTitre = document.querySelector('.cityPos h1');
 const cityPosForm = document.querySelector('.cityPos form');
 const cityPosReset = document.querySelectorAll('.cityPos button')[1];
+const cityPosInput = document.querySelector('.cityPos form input');
+const cityPosFormError = document.querySelector('.cityPosFormError');
+
 
 if(localStorage.getItem("ville") == ""){
     PageOk.style.opacity = 0;
     FirstPage.style.opacity = 1;
+    SplashScreen = true;
 }
 else{
     PageOk.style.opacity = 1;
     FirstPage.style.opacity = 0;
     searchWeather(localStorage.getItem("ville"));
+    SplashScreen = false;
 }
 
 //Permet de mettre le curseur sur le champ de texte
@@ -39,7 +45,7 @@ document.querySelector('input').focus();
 FirstPageForm.addEventListener("submit", function(e){
     let FirstPageInput = document.forms["form"]["ville"].value;
     if(FirstPageInput == ""){
-        alert("Votre champ est vide !");
+        FirstPageFormError.innerHTML = "Votre champ est vide !"
     }
     else{
         searchWeather(FirstPageInput);
@@ -50,25 +56,32 @@ FirstPageForm.addEventListener("submit", function(e){
 cityPosForm.addEventListener("submit", function(e){
     let cityPosFormInput = document.forms["villeForm"]["villePos"].value;
     if(cityPosFormInput == ""){
-        alert("Votre champ est vide !");
+        cityPosFormError.innerHTML = "Votre champ est vide !"
     }
     else{
-        searchWeather(cityPosFormInput);
         document.forms["villeForm"]["villePos"].value = "";
+        searchWeather(cityPosFormInput);
     }
     e.preventDefault();
 });
 
 function resetVille(){
+    $(".cityPos").slideUp("slow");
+    FirstPageFormError.innerHTML = ""
     localStorage.setItem("ville", "");
     PageOk.style.opacity = 0;
     FirstPage.style.opacity = 1;
     firstPage = false;
+    SplashScreen = true;
     document.querySelector('input').value = "";
     document.querySelector('input').focus();
     if(musique.playing()){
         musique.fade(slider.value/100, 0, 2000);
-        setTimeout(musiquechange1, 2000); 
+        setTimeout(musiquechange4, 2000); 
+        function musiquechange4(){
+            playpause()
+            musique.fade(0, slider.value/100, 300);
+        }
     }
 }
 
@@ -97,10 +110,16 @@ function searchWeather(ville){
     .then(result => {
         console.log(result);
         if(result.cod == 404){
-            alert("Ville Introuvable !");
             document.querySelector('input').value = "";
+            cityPosFormError.innerHTML = "Ville introuvable !";
+            FirstPageFormError.innerHTML = "Ville introuvable !";
         }
         else{
+            SplashScreen = false;
+            FirstPageFormError.innerHTML = ""
+            cityPosFormError.innerHTML = ""
+            cityPosTitre.innerHTML = `Entrez votre nouvelle ville (actuellement ${result.name}) :`;
+            $(".cityPos").slideUp("slow");
             localStorage.setItem("ville", ville);
             console.log(localStorage.getItem("ville"));
             PageOk.style.opacity = 1;
@@ -113,7 +132,6 @@ function searchWeather(ville){
                 changementHeure = false;
                 valeurMeteoOK = result.weather[0].main;
                 console.log(`Il fait ${valeurMeteoOK} à ${result.name}`);
-                cityPosTitre.innerHTML = `Entrez votre nouvelle ville (actuellement ${result.name}) :`;
                 if(valeurMeteoOK == "Rain"){
                     valeurMeteoTEMP = "Pluie";
                 }
@@ -136,12 +154,12 @@ function searchWeather(ville){
                     musique.load();
                     if(isplaying == true){
                         musique.play();
-                        setTimeout(musiquechange2, 1000); 
-                        function musiquechange2(){
-                            musique.fade(0, slider.value/100, 1000);
-                            } 
-                        }
                     }
+                    setTimeout(musiquechange2, 1000); 
+                    function musiquechange2(){
+                        musique.fade(0, slider.value/100, 1000);
+                    } 
+                }
                 }
                 else{
                     firstPage = true;
@@ -269,7 +287,6 @@ var heureBG = verifHeureBG();
 function changebg(valeurBG){
     BgColor.className = `bg${valeurMeteoTEMP}${valeurBG}`;
     BgInColor.id = `pageInBG${valeurMeteoTEMP}${valeurBG}`;
-    RainSelector.className = 'rainNormal rainInvisible front-row';
     NuageImage1.className = `nuage1 nuageImage${valeurMeteoTEMP}${valeurBG}`;
     NuageImage2.className = `nuage2 nuageImage${valeurMeteoTEMP}${valeurBG}`;
     BgEtoiles.className = `bgStars${valeurMeteoTEMP}${valeurBG}`;
@@ -279,11 +296,19 @@ function changebg(valeurBG){
     VolumeIcon[0].className = `c${valeurMeteoTEMP}${valeurBG} material-icons`;
     SliderColor.className = `cbg${valeurMeteoTEMP}${valeurBG} slider`;
     cityPosTitre.className = `c${valeurMeteoTEMP}${valeurBG}`;
+    cityPosInput.className = `cityPosInputColor${valeurMeteoTEMP}${valeurBG}`;
+    cityPosFormError.className = `c${valeurMeteoTEMP}${valeurBG} cityPosFormError`;
+    document.querySelectorAll('.cityPos button')[0].className = `cityPosButtonColor${valeurMeteoTEMP}${valeurBG}`;
+    document.querySelectorAll('.cityPos button')[1].className = `cityPosButtonColor${valeurMeteoTEMP}${valeurBG}`;
 
     if(valeurMeteoTEMP == "Pluie"){
         BgRain.className = `bgRain${valeurBG}`;
         RainSelector.className = 'rain rainVisible front-row';
         lancerPluie();
+    }
+    else{
+        BgRain.className = `bgRain`;
+        RainSelector.className = 'rain rainInvisible front-row';
     }
 }
 
@@ -296,7 +321,7 @@ function myTimer(){
     let date = new Date();
     tempverif = true;
     afficheHeure.innerHTML = date.toLocaleTimeString();
-    if(date.getHours() != HeureLancement && tempverif == true){ //Permet de savoir quand il y a un changement d'heure
+    if(date.getHours() != HeureLancement && tempverif == true && SplashScreen == false){ //Permet de savoir quand il y a un changement d'heure
             tempverif = false;
             changementHeure = true;
             HeureLancement = date.getHours();
