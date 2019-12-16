@@ -132,6 +132,40 @@ body{
     transition: 2s;
 }
 
+.bgClear1{
+    background-color: rgb(121, 172, 206);
+    background-image: linear-gradient(rgba(202, 232, 252, 0),rgb(214, 224, 233));
+    transition: 2s;
+}
+
+.bgClear2{
+    background-color: rgb(235, 167, 79);
+    background-image: linear-gradient(rgba(202, 232, 252, 0),rgb(214, 224, 233));
+    transition: 2s;
+}
+
+.bgClear3{
+    background-color: rgb(2, 13, 29);
+    transition: 2s;
+}
+
+.bgBrouillard1{
+    background-color: rgb(107, 107, 107);
+    background-image: linear-gradient(rgba(202, 232, 252, 0),rgb(214, 224, 233));
+    transition: 2s;
+}
+
+.bgBrouillard2{
+    background-color: rgb(107, 107, 107);
+    background-image: linear-gradient(rgba(202, 232, 252, 0),rgb(235, 167, 79));
+    transition: 2s;
+}
+
+.bgBrouillard3{
+    background-color: rgb(2, 13, 29);
+    transition: 2s;
+}
+
 .cNormal1{
     color: rgb(57, 120, 161);
     transition: 2s;
@@ -192,6 +226,65 @@ body{
     transition: 2s;
 }
 
+.cClear1{
+    color: rgb(57, 120, 161);
+    transition: 2s;
+}
+
+.cbgClear1::-webkit-slider-thumb{
+    background: rgb(57, 120, 161);
+    transition: 2s;
+}
+
+.cClear2{
+    color: rgba(228, 156, 62, 0.775);
+    transition: 2s;
+}
+
+.cbgClear2::-webkit-slider-thumb{
+    background: rgba(228, 156, 62, 0.775);
+    transition: 2s;
+}
+
+.cClear3{
+    color: white;
+    transition: 2s;
+}
+
+.cbgClear3::-webkit-slider-thumb{
+    background: white;
+    transition: 2s;
+}
+
+.cBrouillard1{
+    color: white;
+    transition: 2s;
+}
+
+.cbgBrouillard1::-webkit-slider-thumb{
+    background: white;
+    transition: 2s;
+}
+
+.cBrouillard2{
+    color: white;
+    transition: 2s;
+}
+
+.cbgBrouillard2::-webkit-slider-thumb{
+    background: white;
+    transition: 2s;
+}
+
+.cBrouillard3{
+    color: white;
+    transition: 2s;
+}
+
+.cbgBrouillard3::-webkit-slider-thumb{
+    background: white;
+    transition: 2s;
+}
 
 .nuageImageNormal1{
     opacity: 1;
@@ -225,6 +318,36 @@ body{
     opacity: 0;
     transition: 2s;
     filter: contrast(50%);
+}
+
+.nuageImageClear1{
+    opacity: 0;
+    transition: 2s;
+}
+
+.nuageImageClear2{
+    opacity: 0;
+    transition: 2s;
+}
+
+.nuageImageClear3{
+    opacity: 0;
+    transition: 2s;
+}
+
+.nuageImageBrouillard1{
+    opacity: 0;
+    transition: 2s;
+}
+
+.nuageImageBrouillard2{
+    opacity: 0;
+    transition: 2s;
+}
+
+.nuageImageBrouillard3{
+    opacity: 0;
+    transition: 2s;
 }
 
 .bgStarsNormal1{
@@ -285,6 +408,64 @@ body{
     overflow: hidden;
 }
 
+.bgStarsClear1{
+    height: 100vh;
+    position: absolute;
+    opacity: 0;
+    transition: 2s;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.bgStarsClear2{
+    height: 100vh;
+    position: absolute;
+    opacity: 0;
+    transition: 2s;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.bgStarsClear3{
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    transition: 2s;
+    overflow: hidden;
+
+    opacity: 0.8;
+    animation-name: starlight;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+
+.bgStarsBrouillard1{
+    height: 100vh;
+    position: absolute;
+    opacity: 0;
+    transition: 2s;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.bgStarsBrouillard2{
+    height: 100vh;
+    position: absolute;
+    opacity: 0;
+    transition: 2s;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.bgStarsBrouillard3{
+    height: 100vh;
+    position: absolute;
+    opacity: 0;
+    transition: 2s;
+    width: 100vw;
+    overflow: hidden;
+}
+
 .bgRain{
     height: 100vh;
     position: absolute;
@@ -326,6 +507,26 @@ body{
 }
 
 .bgRainNormal{
+    height: 100vh;
+    position: absolute;
+    opacity: 0;
+    transition: 2s;
+    width: 100vw;
+    overflow: hidden;
+    filter: brightness(1) blur(0px);
+}
+
+.bgRainClear{
+    height: 100vh;
+    position: absolute;
+    opacity: 0;
+    transition: 2s;
+    width: 100vw;
+    overflow: hidden;
+    filter: brightness(1) blur(0px);
+}
+
+.bgRainBrouillard{
     height: 100vh;
     position: absolute;
     opacity: 0;
@@ -530,7 +731,6 @@ body{
     transform: scale(0.8);
 }
 
-
 .nuage1{
     position: absolute;
     top: 5%;
@@ -610,6 +810,36 @@ body{
 
 #pageInBGPluie3{
     filter: brightness(0);
+    transition: 2s;
+}
+
+#pageInBGClear1{
+    filter: brightness(1);
+    transition: 2s;
+}
+
+#pageInBGClear2{
+    filter: brightness(0.6);
+    transition: 2s;
+}
+
+#pageInBGClear3{
+    filter: brightness(0);
+    transition: 2s;
+}
+
+#pageInBGBrouillard1{
+    filter: brightness(1) blur(4px) grayscale(50%);
+    transition: 2s;
+}
+
+#pageInBGBrouillard2{
+    filter: brightness(0.6) blur(4px) grayscale(50%);
+    transition: 2s;
+}
+
+#pageInBGBrouillard3{
+    filter: brightness(0) blur(4px) grayscale(50%);
     transition: 2s;
 }
 
@@ -742,6 +972,66 @@ body{
     border-bottom: 2px solid white;
 }
 
+.cityPosInputColorClear1{
+    border-color:rgb(57, 120, 161);
+    caret-color: rgb(57, 120, 161);
+    color: rgb(57, 120, 161);
+}
+
+.cityPosInputColorClear1:focus{
+    border-bottom: 2px solid rgb(43, 98, 134);
+}
+
+.cityPosInputColorClear2{
+    border-color:rgb(235, 167, 79);
+    caret-color: rgb(235, 167, 79);
+    color: rgb(235, 167, 79);
+}
+
+.cityPosInputColorClear2:focus{
+    border-bottom: 2px solid rgb(235, 167, 79);
+}
+
+.cityPosInputColorClear3{
+    border-color:white;
+    caret-color: white;
+    color: white;
+}
+
+.cityPosInputColorClear3:focus{
+    border-bottom: 2px solid white;
+}
+
+.cityPosInputColorBrouillard1{
+    border-color:white;
+    caret-color: white;
+    color: white;
+}
+
+.cityPosInputColorBrouillard1:focus{
+    border-bottom: 2px solid white;
+}
+
+.cityPosInputColorBrouillard2{
+    border-color:white;
+    caret-color: white;
+    color: white;
+}
+
+.cityPosInputColorBrouillard2:focus{
+    border-bottom: 2px solid white;
+}
+
+.cityPosInputColorBrouillard3{
+    border-color:white;
+    caret-color: white;
+    color: white;
+}
+
+.cityPosInputColorBrouillard3:focus{
+    border-bottom: 2px solid white;
+}
+
 .cityPos button{
     font-family: 'Quicksand', sans-serif;
     text-decoration: none;
@@ -834,11 +1124,76 @@ body{
     color: white;
 }
 
+.cityPosButtonColorClear1{
+    background-color: rgb(57, 120, 161);
+    border: solid 2px rgb(57, 120, 161);
+    color: white;
+}
+
+.cityPosButtonColorClear1:hover{
+    background-color: rgba(255, 255, 255, 0);
+    color: rgb(44, 90, 121);
+}
+
+.cityPosButtonColorClear2{
+    background-color: rgb(235, 167, 79);
+    border: solid 2px rgb(235, 167, 79);
+    color: white;
+}
+
+.cityPosButtonColorClear2:hover{
+    background-color: rgba(255, 255, 255, 0);
+    color: rgb(235, 167, 79);
+}
+
+.cityPosButtonColorClear3{
+    background-color: white;
+    border: solid 2px white;
+    color: rgb(2, 13, 29);
+}
+
+.cityPosButtonColorClear3:hover{
+    background-color: rgb(2, 13, 29);
+    color: white;
+}
+
+.cityPosButtonColorBrouillard1{
+    background-color: white;
+    border: solid 2px white;
+    color: rgb(2, 13, 29);
+}
+
+.cityPosButtonColorBrouillard1:hover{
+    background-color: rgba(2, 13, 29, 0);
+    color: white;
+}
+
+.cityPosButtonColorBrouillard2{
+    background-color: white;
+    border: solid 2px white;
+    color: rgb(2, 13, 29);
+}
+
+.cityPosButtonColorBrouillard2:hover{
+    background-color: rgba(2, 13, 29, 0);
+    color: white;
+}
+
+.cityPosButtonColorBrouillard3{
+    background-color: white;
+    border: solid 2px white;
+    color: rgb(2, 13, 29);
+}
+
+.cityPosButtonColorBrouillard:hover{
+    background-color: rgba(2, 13, 29, 0);
+    color: white;
+}
+
 .cityPosFormError{
     transition: 0.3s;
     font-size: 18px;
     font-style: italic;
-    font-weight: normal;
 }
 
 .formError{

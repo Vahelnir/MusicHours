@@ -87,11 +87,12 @@ function resetVille(){
 
 cityPosReset.addEventListener("click", resetVille);
 
-let valeurMeteoTEMP = "normal";
+let valeurMeteoMUSIQUE = "Normal";
+let valeurMeteoTEMP = "Normal";
 let now = new Date();
 let heure = now.getHours();
 let musique = new Howl({
-    src: [`musiques/${valeurMeteoTEMP}/${heure}.mp3`],
+    src: [`musiques/${valeurMeteoMUSIQUE}/${heure}.mp3`],
     autoplay: false,
     loop: true,
     volume: 0.5
@@ -101,6 +102,11 @@ let musique = new Howl({
 function changeLocation(){
     let localisation = prompt("Entrez votre ville :");
     searchWeather(localisation);
+}
+
+function changeMeteoBRUTE(meteo){
+    valeurMeteoTEMP = meteo;
+    changebg(verifHeureBG());
 }
 
 //Coeur du programme, permet de chercher la météo et change la musique, l'arière plan et la position du soleil
@@ -134,9 +140,19 @@ function searchWeather(ville){
                 console.log(`Il fait ${valeurMeteoOK} à ${result.name}`);
                 if(valeurMeteoOK == "Rain"){
                     valeurMeteoTEMP = "Pluie";
+                    valeurMeteoMUSIQUE = "Pluie";
+                }
+                else if(valeurMeteoOK == "Clear"){
+                    valeurMeteoTEMP = "Clear";
+                    valeurMeteoMUSIQUE = "Normal";
+                }
+                else if(valeurMeteoOK == "Mist" || valeurMeteoOK == "Fog"){
+                    valeurMeteoTEMP = "Brouillard";
+                    valeurMeteoMUSIQUE = "Normal";
                 }
                 else{
                     valeurMeteoTEMP = "Normal";
+                    valeurMeteoMUSIQUE = "Normal";
                 }
                 changebg(verifHeureBG());
                 let isplaying = true;
@@ -150,7 +166,7 @@ function searchWeather(ville){
                 function musiquechange1(){
                     musique.pause();
                     musique.unload();
-                    musique._src = `musiques/${valeurMeteoTEMP}/${HeureLancement}.mp3`;
+                    musique._src = `musiques/${valeurMeteoMUSIQUE}/${HeureLancement}.mp3`;
                     musique.load();
                     if(isplaying == true){
                         musique.play();
@@ -164,7 +180,7 @@ function searchWeather(ville){
                 else{
                     firstPage = true;
                     musique.unload();
-                    musique._src = `musiques/${valeurMeteoTEMP}/${HeureLancement}.mp3`;
+                    musique._src = `musiques/${valeurMeteoMUSIQUE}/${HeureLancement}.mp3`;
                     musique.load();
                 }
             }
@@ -300,11 +316,15 @@ function changebg(valeurBG){
     cityPosFormError.className = `c${valeurMeteoTEMP}${valeurBG} cityPosFormError`;
     document.querySelectorAll('.cityPos button')[0].className = `cityPosButtonColor${valeurMeteoTEMP}${valeurBG}`;
     document.querySelectorAll('.cityPos button')[1].className = `cityPosButtonColor${valeurMeteoTEMP}${valeurBG}`;
+    Mouvement.style.opacity = 1;
 
     if(valeurMeteoTEMP == "Pluie"){
         BgRain.className = `bgRain${valeurBG}`;
         RainSelector.className = 'rain rainVisible front-row';
         lancerPluie();
+    }
+    else if(valeurMeteoTEMP == "Brouillard"){
+        Mouvement.style.opacity = 0.2;
     }
     else{
         BgRain.className = `bgRain`;
