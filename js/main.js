@@ -424,6 +424,8 @@ function changebg(valeurBG){
     }
     else if(valeurMeteoTEMP == "Brouillard"){
         Mouvement.style.opacity = 0.2;
+        RainSelector.className = 'rain rainInvisible front-row';
+        BgRain.className = `bgRainBrouillard`;
     }
     else{
         BgRain.className = `bgRain`;
@@ -486,11 +488,23 @@ slider.addEventListener("input", function(){
 
 document.addEventListener('keydown', logKey);
 
+let CityPosFocus = false;
+
+cityPosInput.addEventListener("focusin", function(){
+    CityPosFocus = true;
+});
+
+cityPosInput.addEventListener("focusout", function(){
+    CityPosFocus = false;
+});
+
 function logKey(e) {
-  if(e.code == 'Space' && firstPage == true){
+  if(e.code == 'Space' && firstPage == true && CityPosFocus == false){
     playpause();
   } 
 }
+
+let isUp = true;
 
 $(document).ready(function(){
     $("#volume").click(function(){
@@ -500,8 +514,14 @@ $(document).ready(function(){
 });
 
 LocationButton.addEventListener("click", function(){
-    //changeLocation();
     $(".cityPos").slideToggle("slow");
+    if(isUp == true){
+        document.querySelector(".cityPos form input").focus();
+        isUp = false;
+    }
+    else{
+        isUp = true;
+    }
     $(".musiccontainer").slideUp("slow");
 });
 
