@@ -1195,7 +1195,6 @@ body{
 
 .cityPos form input{
     padding: 8px 0px;
-    width: 100%;
     text-transform: capitalize;
     border: none;
     border-bottom: 2px solid;
@@ -1818,6 +1817,34 @@ body{
 
     .pageIn article{
         width: 50%;
+    }
+
+    /**/
+    
+    .cityPos h1{
+        margin-top: 2%;
+        font-size: 4vw;
+        width: 80%;
+        margin-left: 10%;
+    }
+    
+    .cityPos form{
+        flex-direction: column;
+    }
+    
+    .cityPos form input{
+        width: 80%;
+        margin-right: 0%;
+    }
+
+    .cityPos button{
+        width: 80%;
+    }
+    
+    .cityPos form button{
+        margin-left: 0%;
+        width: 80%;
+        margin-top: 6%;
     }
 }
 
