@@ -159,6 +159,8 @@ function searchWeather(ville){
             FirstPageFormError.innerHTML = "Ville introuvable !";
         }
         else{
+            isUp = true;
+            document.querySelector(".cityPos form input").blur();
             SplashScreen = false;
             FirstPageFormError.innerHTML = ""
             cityPosFormError.innerHTML = ""
