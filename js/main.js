@@ -9,7 +9,7 @@ var valeurMeteoOK = "unset"; //Cette valeur servira à récuperer la valeur fina
 let firstPage = false; //Indique que l'utilisateur viens de venir sur le site
 let changementHeure = false; //Nous servira à détecter un changement d'heure
 let SplashScreen = true; //Permet de savoir si l'on est sur le SplashScreen
-setTimeout(clear, 1); //Fonction de shlag pour clear la console
+//setTimeout(clear, 1); //Fonction de shlag pour clear la console
 
 function clear(){
     window.console.clear();
@@ -32,6 +32,10 @@ const cityPosReset = document.querySelectorAll('.cityPos button')[1];
 const cityPosInput = document.querySelector('.cityPos form input');
 const cityPosFormError = document.querySelector('.cityPosFormError');
 
+const popUp = document.querySelector('.popup');
+const buttonPopOn = document.querySelector('.buttonPopOn');
+const buttonPopOff = document.querySelector('.popup div button');
+
 /* Variable qui nous servira à stocker le décalage horraire entre l'heure de la ville et l'heure UTC*/
 let HeureDeca = 0;
 
@@ -40,6 +44,16 @@ let HeureDeca = 0;
 PARTIE 1 : INITIALISATION
 
 */
+
+buttonPopOn.addEventListener("click", function(){
+    popUp.style.opacity = 1;
+    popUp.style.zIndex = 99999999999999;
+});
+
+buttonPopOff.addEventListener("click", function(){
+    popUp.style.opacity = 0;
+    popUp.style.zIndex = -1;
+});
 
 //Detecte si l'utilisateur avait déjà rentré une ville auparavent, si ce n'est pas le cas, alors le SplashScreen s'affiche
 if(localStorage.getItem("ville") == "" || localStorage.getItem("ville") == undefined){
@@ -432,6 +446,7 @@ changeMouvement();
 var heureBG = verifHeureBG();
 
 function changebg(valeurBG){
+    buttonPopOn.className = `c${valeurMeteoTEMP}${valeurBG} material-icons buttonPopOn`;
     BgColor.className = `bg${valeurMeteoTEMP}${valeurBG}`;
     BgInColor.id = `pageInBG${valeurMeteoTEMP}${valeurBG}`;
     NuageImage1.className = `nuage1 nuageImage${valeurMeteoTEMP}${valeurBG}`;
@@ -561,6 +576,11 @@ function logKey(e) {
   if(e.code == 'Space' && firstPage == true && CityPosFocus == false){
     playpause();
   } 
+
+  if(e.code == 'Escape'){
+    popUp.style.opacity = 0;
+    popUp.style.zIndex = -1;
+  }
 }
 
 let isUp = true;
