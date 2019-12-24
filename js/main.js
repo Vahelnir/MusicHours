@@ -39,6 +39,7 @@ const buttonPopOff = document.querySelector('.popup div button');
 /* Variable qui nous servira à stocker le décalage horraire entre l'heure de la ville et l'heure UTC*/
 let HeureDeca = 0;
 
+let tabSaisons = ['Hiver', 'Printemps', 'Normal', 'Fall'];
 /*
 
 PARTIE 1 : INITIALISATION
@@ -189,13 +190,21 @@ function searchWeather(ville){
         }
         else{
             HeureDeca = result.timezone/3600;
-
+            console.log(result.coord.lat);
+            if(result.coord.lat < 0){
+                tabSaisons = ['Normal', 'Fall', 'Hiver', 'Printemps'];
+            }
+            else{
+                tabSaisons = ['Hiver', 'Printemps', 'Normal', 'Fall'];
+            }
+            
             let dateFinale = new Date(Date.now() + now.getTimezoneOffset() * 60000);
             dateFinale.setHours(dateFinale.getHours() + HeureDeca);
             console.log(dateFinale.toLocaleTimeString());
 
             if(HeureLancement != dateFinale.getHours() && valeurMeteoOK == result.weather[0].main && !changementHeure){
                 HeureLancement = dateFinale.getHours();
+                changebg(verifHeureBG());
 
                 let isplaying = true;
                 if(musique.playing() == false){
@@ -415,25 +424,30 @@ function verifHeureBG(){
 
 function changeMouvement(){
     if(HeureLancement == 6){
+        Mouvement.style.opacity = 0;
+        Mouvement.className = "astre position222";
+        setTimeout(resetPosAstre, 2000);
+        function resetPosAstre(){
+            Mouvement.style.opacity = 0;
+            Mouvement.className = "astre position111";
+        }
+        setTimeout(resetPosAstre2, 4000);
+        function resetPosAstre2(){
+            Mouvement.className = "astre position6";
+            Mouvement.style.opacity = 1;
+        }
+    }
+    else if(HeureLancement == 19){
+        Mouvement.style.opacity = 0;
         Mouvement.className = "astre position222";
         setTimeout(resetPosAstre, 2000);
         function resetPosAstre(){
             Mouvement.className = "astre position111";
         }
-        setTimeout(resetPosAstre2, 2000);
-        function resetPosAstre2(){
-            Mouvement.className = "astre position6";
-        }
-    }
-    else if(HeureLancement == 19){
-        Mouvement.className = "astre position 222";
-        setTimeout(resetPosAstre, 2000);
-        function resetPosAstre(){
-            Mouvement.className = "astre position111";
-        }
-        setTimeout(resetPosAstre2, 2000);
+        setTimeout(resetPosAstre2, 4000);
         function resetPosAstre2(){
             Mouvement.className = "astre position19";
+            Mouvement.style.opacity = 1;
         }
     }
     else{
@@ -467,7 +481,19 @@ function changebg(valeurBG){
     Lightning.style.animationName = "none";
     musiqueEclair.volume(0);
     NeigeFalling.style.opacity = 0;
-    BgInColor.style.backgroundImage = 'url("medias/Plaine\ flat2.png")';
+
+    if((now.getMonth() == 11 && now.getDate() >= 21) || now.getMonth() == 0 || now.getMonth() == 1 || (now.getMonth() == 2 && now.getDate() <= 19)){
+        BgInColor.style.backgroundImage = `url("medias/Plaineflat${tabSaisons[0]}.png")`;
+    }
+    else if((now.getMonth() == 2 && now.getDate() >= 20) || now.getMonth() == 3 || now.getMonth() == 4 || (now.getMonth() <= 5 && now.getDate() <= 19)){
+        BgInColor.style.backgroundImage = `url("medias/Plaineflat${tabSaisons[1]}.png")`;  
+    }
+    else if((now.getMonth() >= 5 && now.getDate() >= 20) || now.getMonth() == 6 || now.getMonth() == 7 || (now.getMonth() <= 8 && now.getDate() <= 21)){
+        BgInColor.style.backgroundImage = `url("medias/Plaineflat${tabSaisons[2]}.png")`;  
+    }
+    else{
+        BgInColor.style.backgroundImage = `url("medias/Plaineflat${tabSaisons[3]}.png")`;
+    }
 
     if(valeurMeteoTEMP == "Pluie"){
         BgRain.className = `bgRain${valeurBG}`;
