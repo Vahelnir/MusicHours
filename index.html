@@ -4,24 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta property="description" content="MusicHours est un site vous permettant, à partir d'une ville de votre choix, d'avoir une musique et un thème s'adaptant à l'heure et à la météo de celle-ci !">
+
     <link rel="stylesheet" href="style.css">
     <script src="node_modules/howler/dist/howler.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cutive+Mono|Quicksand&display=swap" rel="stylesheet">
 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148753735-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-148753735-2');
+    </script>
+
     <link rel="shortcut icon" href="medias/Leaf.png" type="image/x-icon">
 
     <title>MusicHours</title>
 </head>
-<body>    
+<body> 
+    <div class="divTrad">
+        <button class="translate" id="en">en</button>
+        <button class="translate" id="fr">fr</button>
+    </div>   
     <section class="prePage pageInBG1Class bgNormal1">
-        <h1>Entrez votre ville :</h1>
-        <h3>(Elle sera sauvegardée sur votre appareil.)</h3>
+        <h1 key="splashTitre" class="lang" >Entrez votre ville :</h1>
+        <h3 key="splashDesc" class="lang">(Elle sera sauvegardée sur votre appareil.)</h3>
         <form name="form">
             <input type="text" name="ville" placeholder="Ex : Grenoble, Paris, Nantes">
             <h2 class="c1 formError"></h2>
-            <button type="submit">Confirmer</button>
+            <button type="submit" key="splashBouton" class="lang">Confirmer</button>
         </form>
     </section>
     <section class="pageOut bg1 bgNormal1" id="b1">
@@ -51,21 +67,23 @@
                 <h1 class="c1 cNormal1"></h1>
                 <form name="villeForm">
                         <input type="text" name="villePos" class="cityPosInputColorNormal3">
-                        <button class="cityPosButtonColorNormal1">Changer</button>
+                        <button class="lang cityPosButtonColorNormal1" key="mppChangeCity">Changer</button>
                 </form>
                 <h2 class="c1 cityPosFormError"></h2>
-                <button class="cityPosButtonColorNormal1">Réinitialiser la ville</button>
+                <button class="cityPosButtonColorNormal1" key="mppResetCity">Réinitialiser la ville</button>
             </div>
             <i class="material-icons c1 cNormal1 buttonPopOn" id="buttonPopOnID">info</i>
             <section class="popup">
                 <div>
-                    <p>MusicHours est un site vous permettant, à partir d'une ville de votre choix, d'avoir une musique et un thème s'adaptant à l'heure et à la météo de celle-ci !</p>
-                    <p>La totalité des musiques présente sur le site, viennent de l'OST du jeu Animal Crossing : New Leaf, propriété de Nintendo.</p>
-                    <p>Site fait par <a href="https://theomigeat.com/" target="blank">Théo Migeat</a> ~</p>
+                    <p class="lang" key="text1">MusicHours est un site vous permettant, à partir d'une ville de votre choix, d'avoir une musique et un thème s'adaptant à l'heure et à la météo de celle-ci !</p>
+                    <p class="lang" key="text2">La totalité des musiques présentes sur le site, viennent de l'OST du jeu Animal Crossing : New Leaf, propriété de Nintendo.</p>
+                    <p><span class="lang" key="text3">Site fait par </span><a href="https://theomigeat.com/" id="rainbow" target="_blank">Théo Migeat</a> ~</p>
+                    <p><span class="lang" key="text4">Si vous avez la moindre question, n'hésitez pas à me contacter sur </span><a href="https://twitter.com/STM3900" target="_blank">Twitter</a> !</p>
                     <button>Ok !</button>
                 </div>
             </section>  
         </section>      
+        <script src="js/langue.js"></script>
         <script src="js/main.js"></script>
         <script src="js/neige.js"></script>
     </section> 

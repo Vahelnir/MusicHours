@@ -3,6 +3,42 @@ body{
     overflow: hidden;
 }
 
+.divTrad{
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    z-index: 99999999;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    width: 140px;
+}
+
+.translate{
+    font-family: 'Quicksand', sans-serif;
+    text-decoration: none;
+    background-color: rgb(57, 120, 161);
+    border: solid 2px rgb(57, 120, 161);
+    font-size: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    color: white;
+    width: 40%;
+
+    transition: background-color 0.3s, color 0.3s, opacity 0.3s;
+    opacity: 0.6;
+}
+
+.translatehover:hover{
+    background-color: rgba(255, 255, 255, 0);
+    color: rgb(44, 90, 121);
+    transition: background-color 0.3s, color 0.3s;
+    cursor: pointer;
+}
+
 .prePage{
     height: 100vh;
     width: 100%;
@@ -1728,7 +1764,7 @@ body{
 
     font-size: 500px;
 
-    opacity: 0.1;
+    opacity: 0.6;
     transition: opacity 0.3s;
 }
 
@@ -1797,9 +1833,14 @@ body{
     font-size: 22px;
     color: white;
     text-align: justify;
+    transition: 0.3s;
 }
 
 .popup a:hover{
+    color: rgb(99, 145, 185);
+}
+
+#rainbow:hover{
     animation-name: rainbow;
     animation-duration: 2s;
     animation-iteration-count: infinite;
@@ -1900,6 +1941,7 @@ body{
         font-size: 3vw;
     }
 }    
+
 @media (max-width: 800px){
     
     .popup div{
