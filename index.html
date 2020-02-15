@@ -11,6 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cutive+Mono|Quicksand&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/373a1c097b.js" crossorigin="anonymous"></script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148753735-2"></script>
@@ -35,7 +36,7 @@
         <h1 key="splashTitre" class="lang" >Entrez votre ville :</h1>
         <h3 key="splashDesc" class="lang">(Elle sera sauvegardée sur votre appareil.)</h3>
         <form name="form">
-            <input type="text" name="ville" placeholder="Ex : Grenoble, Paris, Nantes">
+            <input type="text" id="placeholder" name="ville" placeholder="Ex : Grenoble, Paris, Nantes">
             <h2 class="c1 formError"></h2>
             <button type="submit" key="splashBouton" class="lang">Confirmer</button>
         </form>
@@ -55,6 +56,10 @@
 
         <section class="pageIn">
             <p id="heure" class="c1 cNormal1"></p>
+            <article>
+                <p id="temp" class="c1 cNormal1"></p>
+                <p id="demain" class="c1 cNormal1"><span class="lang" id="demainTexte" key="weatherTomorrow">Demain : </span><i id="demainIcon" class="fas fa-cloud"></i></p>
+            </article>
             <article>
                 <i class="material-icons c1 cNormal1" id="playpause">play_circle_outline</i>
                 <i class="material-icons c1 cNormal1" id="volume">volume_down</i>

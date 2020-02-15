@@ -3,13 +3,15 @@ MusicHours : Un site par Théo Migeat
 */
 
 let key = ''; //clé de l'API
-let units = 'metrics'; //On utilise les °C ici
+let units = 'metric'; //On utilise les °C ici
 
 var valeurMeteoOK = "unset"; //Cette valeur servira à récuperer la valeur finale de la météo
 let firstPage = false; //Indique que l'utilisateur viens de venir sur le site
 let changementHeure = false; //Nous servira à détecter un changement d'heure
 let SplashScreen = true; //Permet de savoir si l'on est sur le SplashScreen
 //setTimeout(clear, 1); //Fonction de shlag pour clear la console
+
+let forecastOnce = true;
 
 function clear() {
     window.console.clear();
@@ -69,6 +71,7 @@ if (localStorage.getItem("ville") == "" || localStorage.getItem("ville") == unde
     PageOk.style.zIndex = 100000;
     FirstPage.style.opacity = 0;
     FirstPage.style.zIndex = -100000;
+    forecastOnce = true;
     searchWeather(localStorage.getItem("ville"));
     SplashScreen = false;
 }
@@ -82,6 +85,7 @@ FirstPageForm.addEventListener("submit", function (e) {
     if (FirstPageInput == "") {
         FirstPageFormError.innerHTML = erreurVide;
     } else {
+        forecastOnce = true;
         searchWeather(FirstPageInput);
     }
     e.preventDefault();
@@ -94,6 +98,7 @@ cityPosForm.addEventListener("submit", function (e) {
         cityPosFormError.innerHTML = erreurVide;
     } else {
         document.forms["villeForm"]["villePos"].value = "";
+        forecastOnce = true;
         searchWeather(cityPosFormInput);
     }
     e.preventDefault();
@@ -185,7 +190,18 @@ function searchWeather(ville) {
                 document.querySelector('input').value = "";
                 cityPosFormError.innerHTML = erreurNotFound;
                 FirstPageFormError.innerHTML = erreurNotFound;
-            } else {
+            } 
+            else if(result.cod == 429){
+                console.log("ERREUR CRITIQUE : Nombre max de requètes dépassés !");
+                alert("Erreur ! Le site est en maintence suite à un problème d'API, retour à l'écran de base.");
+                resetVille();
+            }
+            else if(result.cod == 401){
+                console.log("ERREUR CRITIQUE : Clé API invalide !");
+                alert("Erreur ! Le site est en maintence suite à un problème d'API, retour à l'écran de base.");
+                resetVille();
+            }
+            else {
                 HeureDeca = result.timezone / 3600;
                 console.log(result.coord.lat);
                 if (result.coord.lat < 0) {
@@ -233,6 +249,33 @@ function searchWeather(ville) {
 
                 changeMouvement();
 
+                Temperature.innerHTML = `${result.main.temp}°C`;
+
+                if(forecastOnce){
+                    forecastOnce = false;
+                    //Pour avoir les prévisions pour le lendemain
+                    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${ville}&APPID=${key}&units=${units}`)
+                    .then(responseDemain => responseDemain.json())
+                    .then(resultDemain => {
+                            let meteoWeatherDemain = resultDemain.list[0].weather[0].main;
+                            console.log(meteoWeatherDemain);
+                            if (meteoWeatherDemain == "Rain") {
+                                MeteoDemainIcon.className = "fas fa-cloud-showers-heavy";
+                            } else if (meteoWeatherDemain == "Thunderstorm") {
+                                MeteoDemainIcon.className = "fas fa-bolt";
+                            } else if (meteoWeatherDemain == "Clear") {
+                                MeteoDemainIcon.className = "fas fa-sun";
+                            } else if (meteoWeatherDemain == "Mist" || valeurMeteoOK == "Fog") {
+                                MeteoDemainIcon.className = "fas fa-smog";
+                            } else if (meteoWeatherDemain == "Snow") {
+                                MeteoDemainIcon.className = "fas fa-snowflake";
+                            } else {
+                                MeteoDemainIcon.className = "fas fa-cloud";
+                            }
+                        } 
+                    );
+                }
+                
                 isUp = true;
                 document.querySelector(".cityPos form input").blur();
                 SplashScreen = false;
@@ -398,6 +441,10 @@ function changePosLightling() {
 /*Selecteurs*/
 
 const TranslateSection = document.querySelectorAll(".translate");
+const Temperature = document.querySelector("#temp");
+const MeteoDemain = document.querySelector("#demain");
+const MeteoDemainIcon = document.querySelector('#demainIcon');
+const MeteoDemainText = document.querySelector('#demainTexte');
 
 const LocationButton = document.querySelector("#locationButton");
 const pluie = document.querySelector(".rain");
@@ -495,6 +542,10 @@ function changebg(valeurBG) {
     TranslateSection[0].className = `cityPosButtonColor${valeurMeteoTEMP}${valeurBG} translate`;
     TranslateSection[1].className = `cityPosButtonColor${valeurMeteoTEMP}${valeurBG} translate`;
 
+    Temperature.className = `c${valeurMeteoTEMP}${valeurBG}`;
+    MeteoDemain.className = `c${valeurMeteoTEMP}${valeurBG} lang`;
+    
+
     Mouvement.style.opacity = 1;
     Lightning.style.opacity = 0;
     Lightning.style.animationName = "none";
@@ -575,7 +626,7 @@ function myTimer() {
     }
 }
 
-const player = document.querySelector('i');
+const player = document.querySelectorAll('i')[1];
 player.addEventListener("click", playpause);
 
 function playpause() {
@@ -644,6 +695,7 @@ LocationButton.addEventListener("click", function () {
     }
     $(".musiccontainer").slideUp("slow");
 });
+
 
 $(function () {
     $('.translate').click(function () {

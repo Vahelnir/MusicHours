@@ -1194,11 +1194,34 @@ body{
     margin-top: 0px;
     margin-bottom: 0px;
     font-family: 'Cutive Mono', monospace;
-    margin-bottom: 2%;
+    margin-bottom: 0%;
     letter-spacing: -30px;
     font-variant-numeric: tabular-nums;
     font-weight: normal;
     z-index: 10;
+}
+
+#temp{
+    font-family: 'Quicksand', sans-serif;
+    font-size: 30px;
+    margin-top: 0px;
+    margin-bottom: 6%;
+}
+
+#demain{
+    font-family: 'Quicksand', sans-serif;
+    font-size: 30px;
+    margin-top: 0px;
+    margin-bottom: 6%;
+}
+
+#demainIconAled{
+    font-family: 'Quicksand', sans-serif;
+    font-size: 30px;
+    margin-top: 0px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 6%;
 }
 
 .musiccontainer{
@@ -1981,6 +2004,14 @@ body{
     #heure{
         font-size: 22vw;
         letter-spacing: -15px;
+    }
+
+    #temp{
+        font-size: 5.5vw;
+    }
+
+    #demain{
+        font-size: 5.5vw;
     }
 
     #playpause{
