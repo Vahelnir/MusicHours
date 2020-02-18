@@ -11,6 +11,9 @@ let changementHeure = false; //Nous servira à détecter un changement d'heure
 let SplashScreen = true; //Permet de savoir si l'on est sur le SplashScreen
 //setTimeout(clear, 1); //Fonction de shlag pour clear la console
 
+let method = "q";
+let pays = "";
+
 let forecastOnce = true;
 
 function clear() {
@@ -27,6 +30,9 @@ const FirstPageForm = document.querySelector('form');
 const FirstPageButton = document.querySelector('button');
 const FirstPageFormError = document.querySelector('.formError');
 
+const FirstPageForm1 = document.querySelectorAll('.inputBox input')[0];
+const FirstPageForm2 = document.querySelectorAll('.inputBox input')[1];
+
 /* Sélecteurs pour le formulaire permétant de changer de ville */
 const cityPosTitre = document.querySelector('.cityPos h1');
 const cityPosForm = document.querySelector('.cityPos form');
@@ -34,9 +40,14 @@ const cityPosReset = document.querySelectorAll('.cityPos button')[1];
 const cityPosInput = document.querySelector('.cityPos form input');
 const cityPosFormError = document.querySelector('.cityPosFormError');
 
+const cityPosForm1 = document.querySelectorAll('.cityPosGroupForm input')[0];
+const cityPosForm2 = document.querySelectorAll('.cityPosGroupForm input')[1];
+
+// Sélecteurs de la PopUp
 const popUp = document.querySelector('.popup');
 const buttonPopOn = document.querySelector('.buttonPopOn');
 const buttonPopOff = document.querySelector('.popup div button');
+
 
 /* Variable qui nous servira à stocker le décalage horraire entre l'heure de la ville et l'heure UTC*/
 let HeureDeca = 0;
@@ -77,7 +88,47 @@ if (localStorage.getItem("ville") == "" || localStorage.getItem("ville") == unde
 }
 
 //Permet de mettre le curseur sur le champ de texte
-document.querySelector('input').focus();
+//document.querySelector('input').focus();
+
+//Permet de detecter si un code postal est entré dans le champ de texte
+FirstPageForm1.addEventListener("input", function(){
+    if(!isNaN(FirstPageForm1.value) && FirstPageForm1.value != "" && !FirstPageForm1.value.includes(" ") && !FirstPageForm1.value.includes(" ")){
+        FirstPageForm1.classList.replace("prePageInputLarge", "prePageInputSmol");
+        FirstPageForm2.classList.replace("prePageInputZipHide", "prePageInputZipShow");
+    }
+    else{
+        FirstPageForm1.classList.replace("prePageInputSmol", "prePageInputLarge");
+        FirstPageForm2.classList.replace("prePageInputZipShow", "prePageInputZipHide");
+        FirstPageForm2.value = "";
+    }
+});
+
+//Rogne la chaine de caractère quand elle est supérieure à 2
+FirstPageForm2.addEventListener("input", function(){
+    if(FirstPageForm2.value.length > 2){
+        FirstPageForm2.value = FirstPageForm2.value.substr(0, 2);
+    }
+});
+
+cityPosForm1.addEventListener("input", function(){
+    if(!isNaN(cityPosForm1.value) && cityPosForm1.value != ""  && !cityPosForm1.value.includes(" ") && !cityPosForm1.value.includes(" ")){
+        cityPosForm1.id = "cityPosFormSmol";
+        setTimeout(() => {
+            cityPosForm2.id = "cityPosFormZipShow";
+        }, 0);
+    }
+    else{
+        cityPosForm1.id = "cityPosFormLarge";
+        cityPosForm2.id = "cityPosFormZipHide";
+        cityPosForm2.value = "";
+    }
+});
+
+cityPosForm2.addEventListener("input", function(){
+    if(cityPosForm2.value.length > 2){
+        cityPosForm2.value = cityPosForm2.value.substr(0, 2);
+    }
+});
 
 //Vérification du contenu du formulaire du SplashScreen
 FirstPageForm.addEventListener("submit", function (e) {
@@ -85,8 +136,15 @@ FirstPageForm.addEventListener("submit", function (e) {
     if (FirstPageInput == "") {
         FirstPageFormError.innerHTML = erreurVide;
     } else {
+        if(!FirstPageForm2.value == ""){
+            pays = `,${FirstPageForm2.value}`;
+        }
+        else{
+            pays = "";
+        }
         forecastOnce = true;
         searchWeather(FirstPageInput);
+        FirstPageForm2.value = "";
     }
     e.preventDefault();
 });
@@ -98,8 +156,15 @@ cityPosForm.addEventListener("submit", function (e) {
         cityPosFormError.innerHTML = erreurVide;
     } else {
         document.forms["villeForm"]["villePos"].value = "";
+        if(!cityPosForm2.value == ""){
+            pays = `,${cityPosForm2.value}`;
+        }
+        else{
+            pays = "";
+        }
         forecastOnce = true;
         searchWeather(cityPosFormInput);
+        cityPosForm2.value = "";
     }
     e.preventDefault();
 });
@@ -107,7 +172,7 @@ cityPosForm.addEventListener("submit", function (e) {
 //Fonction permettant de reset ça ville, remet le site à 0
 function resetVille() {
     $(".cityPos").slideUp("slow");
-    FirstPageFormError.innerHTML = ""
+    FirstPageFormError.innerHTML = "";
     localStorage.setItem("ville", "");
     PageOk.style.opacity = 0;
     FirstPage.style.opacity = 1;
@@ -116,7 +181,12 @@ function resetVille() {
     firstPage = false;
     SplashScreen = true;
     document.querySelector('input').value = "";
-    document.querySelector('input').focus();
+
+    FirstPageForm1.classList.replace("prePageInputSmol", "prePageInputLarge");
+    FirstPageForm2.classList.replace("prePageInputZipShow", "prePageInputZipHide");
+    FirstPageForm2.value = "";
+
+    //document.querySelector('input').focus();
     if (musique.playing()) {
         musique.fade(slider.value / 100, 0, 2000);
         setTimeout(musiquechange4, 2000);
@@ -142,7 +212,7 @@ let musique = new Howl({
     volume: 0.5
 });
 
-//Fonction servant à changer la météo sans prendre compte de celle de la ville. N'est utilisé qu'a des fins de présentation, directement dans la console
+//Fonction servant à changer la météo sans prendre compte de celle de la ville. N'est utilisée qu'a des fins de présentation, directement dans la console
 function changeMeteoBRUTE(meteo) {
     valeurMeteoTEMP = meteo;
     changebg(verifHeureBG());
@@ -182,7 +252,20 @@ function changeMeteoBRUTE(meteo) {
 
 //Coeur du programme, permet de chercher la météo et change la musique, l'arière plan et la position du soleil
 function searchWeather(ville) {
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${ville}&APPID=${key}&units=${units}`)
+    //Detecte si l'utilisateur à entrer un code postal ou un nom de ville
+    if(!isNaN(ville)){
+        method = "zip";
+        localStorage.setItem("method", method);
+        localStorage.setItem("pays", pays);
+    }
+    else{
+        method = "q";
+        localStorage.setItem("method", method);
+        localStorage.setItem("pays", pays);
+        pays = "";
+    }
+    //Lancement de la requète
+    fetch(`https://api.openweathermap.org/data/2.5/weather?${method}=${ville}${pays}&APPID=${key}&units=${units}`) //A faire
         .then(response => response.json())
         .then(result => {
             console.log(result);
@@ -202,6 +285,10 @@ function searchWeather(ville) {
                 resetVille();
             }
             else {
+                cityPosForm1.id = "cityPosFormLarge";
+                cityPosForm2.id = "cityPosFormZipHide";
+                cityPosForm2.value = "";
+
                 HeureDeca = result.timezone / 3600;
                 console.log(result.coord.lat);
                 if (result.coord.lat < 0) {
@@ -275,7 +362,7 @@ function searchWeather(ville) {
                         } 
                     );
                 }
-                
+
                 isUp = true;
                 document.querySelector(".cityPos form input").blur();
                 SplashScreen = false;
@@ -283,7 +370,7 @@ function searchWeather(ville) {
                 cityPosFormError.innerHTML = ""
                 cityPosTitre.innerHTML = `${cityNew}${result.name}) :`;
                 $(".cityPos").slideUp("slow");
-                localStorage.setItem("ville", ville);
+                localStorage.setItem("ville", result.name);
                 console.log(localStorage.getItem("ville"));
                 PageOk.style.opacity = 1;
                 FirstPage.style.opacity = 0;
@@ -535,6 +622,7 @@ function changebg(valeurBG) {
     SliderColor.className = `cbg${valeurMeteoTEMP}${valeurBG} slider`;
     cityPosTitre.className = `c${valeurMeteoTEMP}${valeurBG}`;
     cityPosInput.className = `cityPosInputColor${valeurMeteoTEMP}${valeurBG}`;
+    cityPosForm2.className = `cityPosInputColor${valeurMeteoTEMP}${valeurBG}`;
     cityPosFormError.className = `c${valeurMeteoTEMP}${valeurBG} cityPosFormError`;
     document.querySelectorAll('.cityPos button')[0].className = `lang cityPosButtonColor${valeurMeteoTEMP}${valeurBG}`;
     document.querySelectorAll('.cityPos button')[1].className = `lang cityPosButtonColor${valeurMeteoTEMP}${valeurBG}`;

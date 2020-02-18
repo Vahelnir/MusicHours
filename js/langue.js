@@ -3,6 +3,7 @@ let arrLang = {
 
         // SplashScreen
         "splashTitre": "Enter your city:",
+        "splashZip": "Or your ZIP code",
         "splashDesc": "(It will be saved on your device.)",
         "splashBouton": "Confirm",
         "splashErreurVide": "Your field is empty!",
@@ -25,6 +26,7 @@ let arrLang = {
 
         // SplashScreen
         "splashTitre": "Entrez votre ville :",
+        "splashZip": "Ou votre code postal",
         "splashDesc": "(Elle sera sauvegardée sur votre appareil.)",
         "splashBouton": "Confirmer",
         "splashErreurVide": "Votre champ est vide !",
@@ -68,7 +70,9 @@ let arrLang = {
         erreurNotFound = "City not found!";
         cityNew = "Enter your new city (currently ";
 
-        Placeholder.placeholder = "Ex : New York, London, Paris";
+        Placeholder.placeholder = "Ex : Chicago, London, 10001";
+        FirstPageForm2.placeholder = "Country ID";
+        cityPosForm2.placeholder = "Country ID";
       }
       else{
         ButtonFr.style.opacity = 0.6;
@@ -79,7 +83,9 @@ let arrLang = {
         erreurNotFound = "Ville introuvable !";
         cityNew = "Entrez votre nouvelle ville (actuellement ";
 
-        Placeholder.placeholder = "Ex : Grenoble, Paris, Nantes";
+        Placeholder.placeholder = "Ex : Grenoble, Paris, 38180";
+        FirstPageForm2.placeholder = "ID Pays";
+        cityPosForm2.placeholder = "ID Pays";
       }
 
       $('.lang').each(function(index, item) {

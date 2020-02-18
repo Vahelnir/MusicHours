@@ -34,12 +34,16 @@
     </div>   
     <section class="prePage pageInBG1Class bgNormal1">
         <h1 key="splashTitre" class="lang" >Entrez votre ville :</h1>
-        <h3 key="splashDesc" class="lang">(Elle sera sauvegardée sur votre appareil.)</h3>
+        <h4 key="splashZip" class="lang">Ou votre code postal</h4>
         <form name="form">
-            <input type="text" id="placeholder" name="ville" placeholder="Ex : Grenoble, Paris, Nantes">
+            <div class="inputBox">
+                <input type="text" class="prePageInputLarge" id="placeholder" name="ville" placeholder="Ex : Grenoble, Paris, 38180">
+                <input type="text" class="prePageInputZipHide" id="placeholderSmol" name="zip" placeholder="ID Pays">
+            </div>
             <h2 class="c1 formError"></h2>
             <button type="submit" key="splashBouton" class="lang">Confirmer</button>
         </form>
+        <h3 key="splashDesc" class="lang">(Elle sera sauvegardée sur votre appareil.)</h3>
     </section>
     <section class="pageOut bg1 bgNormal1" id="b1">
         <img src="medias/Soleil.png" alt="" class="astre">
@@ -71,7 +75,10 @@
             <div class="cityPos">
                 <h1 class="c1 cNormal1"></h1>
                 <form name="villeForm">
-                        <input type="text" name="villePos" class="cityPosInputColorNormal3">
+                        <div class="cityPosGroupForm">
+                            <input type="text" name="villePos" class="cityPosInputColorNormal3" id="cityPosFormLarge">
+                            <input type="text" name="villeZip" class="cityPosInputColorNormal3" id="cityPosFormZipHide" placeholder="ID Pays">
+                        </div>
                         <button class="lang cityPosButtonColorNormal1" key="mppChangeCity">Changer</button>
                 </form>
                 <h2 class="c1 cityPosFormError"></h2>

@@ -1,6 +1,7 @@
 body{
     margin: 0px;
     overflow: hidden;
+    font-family: 'Quicksand', sans-serif;
 }
 
 .divTrad{
@@ -66,7 +67,16 @@ body{
     font-size: 1.20vw;
     letter-spacing: 0px;
     color: rgb(57, 120, 161);
-    margin-top: 0;
+    text-align: center;
+    margin-bottom: 75px;
+}
+
+.prePage h4{
+    font-size: 1vw;
+    letter-spacing: 0px;
+    color: rgb(57, 120, 161);
+    margin-top: -15px;
+    font-style: italic;
 }
 
 .prePage form{
@@ -87,7 +97,6 @@ body{
     border-radius: 5px;
     color: white;
     margin-top: 25px;
-    margin-bottom: 75px;
     width: 100%;
     opacity: 0.8;
     
@@ -105,7 +114,6 @@ body{
     padding: 12px 20px;
     margin-bottom: 2%;
     box-sizing: border-box;
-    width: 100%;
     text-transform: capitalize;
     border: none;
     border-bottom: 2px solid rgb(57, 120, 161);
@@ -119,6 +127,30 @@ body{
     text-align: center;
     opacity: 0.8;
 }
+
+.inputBox{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+}
+
+.prePageInputLarge{
+    width: 100%;
+}
+
+.prePageInputSmol{
+    width: 70%;
+}
+
+.prePageInputZipHide{
+    display: none;
+}
+
+.prePageInputZipShow{
+    width: 25%;
+}
   
 .prePage input:focus{
     border: none;
@@ -131,6 +163,11 @@ body{
     font-size: 20px;
     opacity: 1;
     transition: 0.3s;
+}
+
+#placeholderSmol::placeholder{
+    font-size: 15px;
+    font-style: italic;
 }
 
 .prePage input:focus::placeholder{
@@ -1276,13 +1313,54 @@ body{
     font-size: 20px;
     text-align: center;
     opacity: 0.8;
-    width: 25%;
     margin-right: 1%;
+}
+
+.cityPos form input::placeholder{
+    transition: 0.3s;
+}
+
+.cityPos form input:focus::placeholder{
+    opacity: 0;
+}
+
+.cityPosGroupForm{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+    width: 25%;
+}
+
+#cityPosFormLarge{
+    width: 100%;
+}
+
+#cityPosFormSmol{
+    width: 70%;
+}
+
+#cityPosFormZipShow{
+    width: 25%;
+}
+
+#cityPosFormZipShow::placeholder{
+    font-size: 15px;
+    font-style: italic;
+}
+
+#cityPosFormZipHide{
+    display: none;
 }
 
 .cityPosInputColorNormal1{
     border-color:rgb(57, 120, 161);
     caret-color: rgb(57, 120, 161);
+    color: rgb(57, 120, 161);
+}
+
+.cityPosInputColorNormal1::placeholder{
     color: rgb(57, 120, 161);
 }
 
@@ -1296,6 +1374,10 @@ body{
     color: rgb(235, 167, 79);
 }
 
+.cityPosInputColorNormal2::placeholder{
+    color: rgb(235, 167, 79);
+}
+
 .cityPosInputColorNormal2:focus{
     border-bottom: 2px solid rgb(235, 167, 79);
 }
@@ -1303,6 +1385,10 @@ body{
 .cityPosInputColorNormal3{
     border-color:white;
     caret-color: white;
+    color: white;
+}
+
+.cityPosInputColorNormal3::placeholder{
     color: white;
 }
 
@@ -1316,6 +1402,10 @@ body{
     color: white;
 }
 
+.cityPosInputColorPluie1::placeholder{
+    color: white;
+}
+
 .cityPosInputColorPluie1:focus{
     border-bottom: 2px solid white;
 }
@@ -1323,6 +1413,10 @@ body{
 .cityPosInputColorPluie2{
     border-color:white;
     caret-color: white;
+    color: white;
+}
+
+.cityPosInputColorPluie2::placeholder{
     color: white;
 }
 
@@ -1336,6 +1430,11 @@ body{
     color: white;
 }
 
+.cityPosInputColorPluie3::placeholder{
+    color: white;
+}
+
+
 .cityPosInputColorPluie3:focus{
     border-bottom: 2px solid white;
 }
@@ -1343,6 +1442,10 @@ body{
 .cityPosInputColorClear1{
     border-color:rgb(57, 120, 161);
     caret-color: rgb(57, 120, 161);
+    color: rgb(57, 120, 161);
+}
+
+.cityPosInputColorClear1::placeholder{
     color: rgb(57, 120, 161);
 }
 
@@ -1356,6 +1459,10 @@ body{
     color: rgb(235, 167, 79);
 }
 
+.cityPosInputColorClear2::placeholder{
+    color: rgb(235, 167, 79);
+}
+
 .cityPosInputColorClear2:focus{
     border-bottom: 2px solid rgb(235, 167, 79);
 }
@@ -1363,6 +1470,10 @@ body{
 .cityPosInputColorClear3{
     border-color:white;
     caret-color: white;
+    color: white;
+}
+
+.cityPosInputColorClear3::placeholder{
     color: white;
 }
 
@@ -1376,6 +1487,10 @@ body{
     color: white;
 }
 
+.cityPosInputColorBrouillard1::placeholder{
+    color: white;
+}
+
 .cityPosInputColorBrouillard1:focus{
     border-bottom: 2px solid white;
 }
@@ -1383,6 +1498,10 @@ body{
 .cityPosInputColorBrouillard2{
     border-color:white;
     caret-color: white;
+    color: white;
+}
+
+.cityPosInputColorBrouillard2::placeholder{
     color: white;
 }
 
@@ -1396,6 +1515,10 @@ body{
     color: white;
 }
 
+.cityPosInputColorBrouillard3::placeholder{
+    color: white;
+}
+
 .cityPosInputColorBrouillard3:focus{
     border-bottom: 2px solid white;
 }
@@ -1403,6 +1526,10 @@ body{
 .cityPosInputColorOrage1{
     border-color:white;
     caret-color: white;
+    color: white;
+}
+
+.cityPosInputColorOrage1::placeholder{
     color: white;
 }
 
@@ -1416,6 +1543,10 @@ body{
     color: white;
 }
 
+.cityPosInputColorOrage2::placeholder{
+    color: white;
+}
+
 .cityPosInputColorOrage2:focus{
     border-bottom: 2px solid white;
 }
@@ -1423,6 +1554,10 @@ body{
 .cityPosInputColorOrage3{
     border-color:white;
     caret-color: white;
+    color: white;
+}
+
+.cityPosInputColorOrage3::placeholder{
     color: white;
 }
 
@@ -1436,6 +1571,10 @@ body{
     color: white;
 }
 
+.cityPosInputColorNeige1::placeholder{
+    color: white;
+}
+
 .cityPosInputColorNeige1:focus{
     border-bottom: 2px solid white;
 }
@@ -1446,6 +1585,10 @@ body{
     color: white;
 }
 
+.cityPosInputColorNeige2::placeholder{
+    color: white;
+}
+
 .cityPosInputColorNeige2:focus{
     border-bottom: 2px solid white;
 }
@@ -1453,6 +1596,10 @@ body{
 .cityPosInputColorNeige3{
     border-color:white;
     caret-color: white;
+    color: white;
+}
+
+.cityPosInputColorNeige3::placeholder{
     color: white;
 }
 
@@ -1963,6 +2110,10 @@ body{
     .prePage h3{
         font-size: 3vw;
     }
+    .prePage h4{
+        font-size: 3vw;
+        margin-top: 2%;
+    }
 }    
 
 @media (max-width: 800px){
@@ -2053,6 +2204,9 @@ body{
     }
 
     .cityPos button{
+        width: 80%;
+    }
+    .cityPosGroupForm{
         width: 80%;
     }
     
