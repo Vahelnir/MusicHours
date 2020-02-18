@@ -51,6 +51,7 @@ let arrLang = {
 
   let cityNew = "Entrez votre nouvelle ville (actuellement ";
   let erreurVide = "Votre champ est vide !";
+  let erreurZip = "Initiale de pays vide ! (Ex : fr, it, en)";
   let erreurNotFound = "Ville introuvable !";
 
   ButtonEn.style.opacity = 0.3;
@@ -66,7 +67,8 @@ let arrLang = {
         ButtonFr.classList.add("translatehover");
         ButtonEn.style.opacity = 0.6;
         ButtonEn.classList.remove("translatehover");
-        erreurVide = "Your field is empty!"
+        erreurVide = "Your field is empty!";
+        erreurZip = "Country initial empty! (Ex: fr, it, en)";
         erreurNotFound = "City not found!";
         cityNew = "Enter your new city (currently ";
 
@@ -80,6 +82,7 @@ let arrLang = {
         ButtonEn.style.opacity = 0.3;
         ButtonEn.classList.add("translatehover");
         erreurVide = "Votre champ est vide !";
+        erreurZip = "Initiale de pays vide ! (Ex : fr, it, en)";
         erreurNotFound = "Ville introuvable !";
         cityNew = "Entrez votre nouvelle ville (actuellement ";
 

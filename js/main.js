@@ -2,7 +2,7 @@
 MusicHours : Un site par Théo Migeat
 */
 
-let key = ''; //clé de l'API
+let key = '514f4f801d4434a9be417221619c6d85'; //clé de l'API
 let units = 'metric'; //On utilise les °C ici
 
 var valeurMeteoOK = "unset"; //Cette valeur servira à récuperer la valeur finale de la météo
@@ -135,7 +135,11 @@ FirstPageForm.addEventListener("submit", function (e) {
     let FirstPageInput = document.forms["form"]["ville"].value;
     if (FirstPageInput == "") {
         FirstPageFormError.innerHTML = erreurVide;
-    } else {
+    } 
+    else if(!isNaN(FirstPageForm1.value) && FirstPageForm2.value == ""){
+        FirstPageFormError.innerHTML = erreurZip;
+    }
+    else {
         if(!FirstPageForm2.value == ""){
             pays = `,${FirstPageForm2.value}`;
         }
@@ -154,7 +158,11 @@ cityPosForm.addEventListener("submit", function (e) {
     let cityPosFormInput = document.forms["villeForm"]["villePos"].value;
     if (cityPosFormInput == "") {
         cityPosFormError.innerHTML = erreurVide;
-    } else {
+    } 
+    else if(!isNaN(cityPosForm1.value) && cityPosForm2.value == ""){
+        cityPosFormError.innerHTML = erreurZip;
+    }
+    else {
         document.forms["villeForm"]["villePos"].value = "";
         if(!cityPosForm2.value == ""){
             pays = `,${cityPosForm2.value}`;
@@ -791,9 +799,18 @@ $(function () {
             cityPosFormError.innerHTML = erreurVide;
         }
 
+        if(!isNaN(cityPosForm1.value) && FirstPageForm2.value == ""){
+            cityPosFormError.innerHTML = erreurZip;
+        }
+
         if(!FirstPageFormError.innerHTML == ""){
             FirstPageFormError.innerHTML = erreurVide;
         }
+
+        if(!isNaN(FirstPageForm1.value) && FirstPageForm2.value == ""){
+            FirstPageFormError.innerHTML = erreurZip;
+        }
+
         cityPosTitre.innerHTML = `${cityNew}${localStorage.getItem("ville")}) :`;
     });
 });
