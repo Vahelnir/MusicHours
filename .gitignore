@@ -1,3 +1,5 @@
 node_modules
-package-lock.json
-cles.txt
+.DS_Store
+dist
+*.local
+old
