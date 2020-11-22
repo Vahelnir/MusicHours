@@ -1,8 +1,15 @@
 <template>
-  <div class="divTrad">
-    <button class="translate" id="en">en</button>
-    <button class="translate" id="fr">fr</button>
+  <div class="lang-selector">
+    <button
+      v-for="lang in available_langs"
+      :key="lang"
+      class="lang-selector__button button button--tv"
+      :class="{ 'lang-selector__button--active': selectedLang === lang }"
+      @click="selectLang(lang)"
+    >
+      {{ lang }}
+    </button>
   </div>
 </template>
 
-<script src="./LangSelector.js" />
+<script lang="ts" src="./LangSelector.ts" />

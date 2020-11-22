@@ -1,0 +1,68 @@
+body {
+  font-family: "Quicksand", sans-serif;
+}
+
+html,
+body,
+#app {
+  margin: 0px;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #3978a1;
+  color: white;
+  border: solid 2px #3978a1;
+  border-radius: 5px;
+  font-size: 20px;
+  padding: 10px 0;
+  margin-top: 25px;
+  width: 100%;
+  opacity: 0.8;
+
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.button:hover {
+  background-color: transparent;
+  transition: background-color 0.3s, color 0.3s;
+  cursor: pointer;
+}
+
+.input {
+  box-sizing: border-box;
+  padding: 12px 20px;
+  margin-bottom: 2%;
+  border: none;
+  border-bottom: 2px solid #3978a1;
+  border-radius: 0px;
+  transition: width 0.3s;
+  outline: none;
+  background: none;
+  caret-color: #3978a1;
+  color: #3978a1;
+  text-transform: capitalize;
+  text-align: center;
+  font-size: 25px;
+  font-weight: 400;
+  font-family: Arial;
+  opacity: 0.8;
+}
+
+.input:focus {
+  border: none;
+  border-bottom: 2px solid #2b6286;
+}
+
+.input::placeholder {
+  color: #3978a1;
+  font-style: italic;
+  font-size: 20px;
+  opacity: 1;
+  transition: 0.3s;
+}

@@ -1,0 +1,110 @@
+:root {
+  --day-color: #3978a1;
+  --sunset-color: #cb7f1c;
+  --night-color: #fff;
+}
+
+.time {
+  &--day {
+    & .foreground {
+      filter: brightness(1);
+    }
+
+    & .tv-color {
+      color: var(--day-color);
+    }
+
+    & .tv-background {
+      background: var(--day-color);
+    }
+
+    & .button--tv {
+      background: var(--day-color);
+      border-color: var(--day-color);
+      color: white;
+
+      &:hover {
+        background: inherit;
+      }
+    }
+
+    & .input {
+      border-color: var(--day-color);
+      caret-color: var(--day-color);
+      color: var(--day-color);
+
+      &::placeholder {
+        color: var(--day-color);
+      }
+    }
+  }
+
+  &--sunset {
+    & .foreground {
+      filter: brightness(0.6);
+    }
+
+    & .tv-color {
+      color: var(--sunset-color);
+    }
+
+    & .tv-background {
+      background: var(--sunset-color);
+    }
+
+    & .button--tv {
+      background: var(--sunset-color);
+      border-color: var(--sunset-color);
+      color: white;
+
+      &:hover {
+        background: inherit;
+      }
+    }
+
+    & .input {
+      border-color: var(--sunset-color);
+      caret-color: var(--sunset-color);
+      color: var(--sunset-color);
+
+      &::placeholder {
+        color: var(--sunset-color);
+      }
+    }
+  }
+
+  &--night {
+    & .foreground {
+      filter: brightness(0);
+    }
+
+    & .tv-color {
+      color: var(--night-color);
+    }
+
+    & .tv-background {
+      background: var(--night-color);
+    }
+
+    & .button--tv {
+      background: var(--night-color);
+      border-color: var(--night-color);
+      color: black;
+
+      &:hover {
+        background: inherit;
+        color: white;
+      }
+    }
+
+    & .input {
+      border-color: var(--night-color);
+      caret-color: var(--night-color);
+      color: var(--night-color);
+
+      &::placeholder {
+        color: var(--night-color);
+      }
+    }
+  }
+}

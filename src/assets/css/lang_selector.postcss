@@ -1,0 +1,33 @@
+.lang-selector {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  width: 140px;
+}
+
+.lang-selector__button {
+  font-size: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: white;
+  width: 40%;
+
+  transition: background-color 0.3s, color 0.3s, opacity 0.3s;
+  opacity: 0.3;
+}
+
+.lang-selector__button:hover {
+  background-color: #ffffff00;
+  color: #2c5a79;
+  transition: background-color 0.3s, color 0.3s;
+  cursor: pointer;
+}
+
+.lang-selector__button--active {
+  opacity: 0.6;
+}

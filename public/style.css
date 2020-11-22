@@ -288,7 +288,7 @@ body {
 }
 
 .cNormal1 {
-  color: rgb(57, 120, 161);
+  color: #3978a1;
   transition: 2s;
 }
 
@@ -1954,16 +1954,21 @@ body {
   justify-content: center;
 
   position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
   background: rgba(0, 0, 0, 0.85);
 
-  height: 100vh;
-  width: 100%;
-
-  font-family: "Quicksand", sans-serif;
-
+  transition: opacity 0.3s;
   z-index: -1;
-  transition: 0.3s;
   opacity: 0;
+}
+
+.popup.popup--open {
+  opacity: 1;
+  z-index: 4;
 }
 
 .popup div {
@@ -2040,20 +2045,6 @@ body {
 
   100% {
     transform: translateX(0px);
-  }
-}
-
-@keyframes starlight {
-  0% {
-    opacity: 0.5;
-  }
-
-  50% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0.5;
   }
 }
 

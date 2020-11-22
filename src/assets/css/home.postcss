@@ -1,0 +1,143 @@
+#home.background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transition: 2s;
+}
+
+.foreground {
+  position: absolute;
+  inset: 0;
+  transition: 2s;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  &--trees {
+    background-image: url("/images/Plaine\ flat2.png");
+  }
+}
+
+.pre-page {
+  transition: 2s;
+  background-attachment: white;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  font-family: "Quicksand", sans-serif;
+
+  & h1 {
+    font-size: 3vw;
+    letter-spacing: 5px;
+    margin-bottom: 25px;
+  }
+
+  & h3 {
+    font-size: 1.2vw;
+    letter-spacing: 0px;
+    text-align: center;
+    margin-bottom: 75px;
+  }
+
+  & h4 {
+    font-size: 1vw;
+    letter-spacing: 0px;
+    margin-top: -15px;
+    font-style: italic;
+  }
+
+  & form {
+    width: 100%;
+  }
+
+  & .input-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+  }
+
+  & .city {
+    flex: 1;
+  }
+
+  & .zip {
+    width: 150px;
+    margin-left: 30px;
+  }
+
+  & .zip--hidden {
+    width: 0px;
+    margin-left: 0;
+    visibility: collapse;
+    padding: 0;
+  }
+}
+
+.time {
+  &--day {
+    &.background {
+      background-color: #79acce;
+      background-image: linear-gradient(#cae8fc00, #d6e0e9);
+    }
+  }
+
+  &--sunset {
+    &.background {
+      background-color: #eba74f;
+      background-image: linear-gradient(#cae8fc00, #d6e0e9);
+    }
+  }
+
+  &--night {
+    &.background {
+      background-color: #020d1d;
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .pre-page {
+    form {
+      width: 50%;
+    }
+
+    & h1 {
+      font-size: 4vw;
+    }
+
+    & h3 {
+      font-size: 3vw;
+    }
+
+    & h4 {
+      font-size: 3vw;
+      margin-top: 2%;
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .pre-page form {
+    width: 80%;
+  }
+
+  .pre-page h1 {
+    font-size: 5vw;
+  }
+}
+
+@media (max-width: 400px) {
+  .pre-page h1 {
+    font-size: 6vw;
+  }
+}

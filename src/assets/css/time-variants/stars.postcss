@@ -1,0 +1,30 @@
+.time--night {
+  &.weather--normal .stars {
+    opacity: 0.8;
+    animation-name: starlight;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+  }
+
+  &.weather--rain .stars {
+    opacity: 0.5;
+  }
+
+  &.weather--clear .stars {
+    opacity: 0.8;
+    animation-name: starlight;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+  }
+
+  &.weather--fog .stars {
+  }
+
+  &.weather--thunder .stars {
+    opacity: 0.1;
+  }
+
+  &.weather--snow .stars {
+    opacity: 0.2;
+  }
+}

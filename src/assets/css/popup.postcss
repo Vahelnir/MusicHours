@@ -1,0 +1,84 @@
+.popup__button {
+  position: absolute;
+  bottom: 25px;
+  left: 25px;
+  margin-bottom: 0px;
+
+  font-size: 60px;
+
+  opacity: 0.6;
+  transition: opacity 0.3s;
+}
+
+.popup__button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.popup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background: rgba(0, 0, 0, 0.85);
+
+  transition: opacity 0.3s;
+  z-index: -1;
+  opacity: 0;
+}
+
+.popup.popup--open {
+  opacity: 1;
+  z-index: 4;
+}
+
+.popup div {
+  width: 50%;
+}
+
+.popup p {
+  font-size: 22px;
+  color: white;
+  text-align: justify;
+}
+
+.popup button {
+  width: 100%;
+  transition: 0.3s;
+
+  font-size: 18px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 2px;
+  opacity: 0.8;
+  margin-top: 5%;
+  border: white 2px solid;
+
+  background: rgb(255, 255, 255);
+  color: rgb(2, 13, 29);
+}
+
+.popup button:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0);
+  cursor: pointer;
+}
+
+.popup a {
+  font-size: 22px;
+  color: white;
+  text-align: justify;
+  transition: 0.3s;
+}
+
+.popup a:hover {
+  color: rgb(99, 145, 185);
+}
